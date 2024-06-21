@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"arabelatso.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="This document files how to install Torch7:  On Ubuntu 18.0.4  Lua5.2  Cuda 10.1  本文将详细分析该协议的数据结构及迁移规则 （Murphi语言）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Install Torch7 using Lua5.2 on Ubuntu 18.0.4">
+<meta property="og:url" content="https://arabelatso.github.io/2020/01/05/Install%20lua5.2%20luarocks%20and%20torch7%20on%20Ubuntu18.0.4%20with%20CUDA9.1/index.html">
+<meta property="og:site_name" content="Arabela&#39;s Blog">
+<meta property="og:description" content="This document files how to install Torch7:  On Ubuntu 18.0.4  Lua5.2  Cuda 10.1  本文将详细分析该协议的数据结构及迁移规则 （Murphi语言）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-01-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-06-21T12:30:20.684Z">
+<meta property="article:author" content="Arabela Tso">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://arabelatso.github.io/2020/01/05/Install%20lua5.2%20luarocks%20and%20torch7%20on%20Ubuntu18.0.4%20with%20CUDA9.1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://arabelatso.github.io/2020/01/05/Install%20lua5.2%20luarocks%20and%20torch7%20on%20Ubuntu18.0.4%20with%20CUDA9.1/","path":"2020/01/05/Install lua5.2 luarocks and torch7 on Ubuntu18.0.4 with CUDA9.1/","title":"Install Torch7 using Lua5.2 on Ubuntu 18.0.4"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Install Torch7 using Lua5.2 on Ubuntu 18.0.4 | Arabela's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Arabela's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Download-Torch7-from-github"><span class="nav-number">1.</span> <span class="nav-text">Download Torch7 from github</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-dependencies"><span class="nav-number">2.</span> <span class="nav-text">Install dependencies</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-Torch7"><span class="nav-number">3.</span> <span class="nav-text">Install Torch7</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#With-Lua5-2"><span class="nav-number">3.1.</span> <span class="nav-text">With Lua5.2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#With-Lua-5-1"><span class="nav-number">3.2.</span> <span class="nav-text">With Lua 5.1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#If-failed"><span class="nav-number">3.3.</span> <span class="nav-text">If failed</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Test-installation-success"><span class="nav-number">4.</span> <span class="nav-text">Test installation success</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Test-torch"><span class="nav-number">4.1.</span> <span class="nav-text">Test torch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Test-luarocks"><span class="nav-number">4.2.</span> <span class="nav-text">Test luarocks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fully-test"><span class="nav-number">4.3.</span> <span class="nav-text">Fully test</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-CUDA-related-modules"><span class="nav-number">5.</span> <span class="nav-text">Install CUDA-related modules</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-cutorch"><span class="nav-number">5.1.</span> <span class="nav-text">Install cutorch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-cunn"><span class="nav-number">5.2.</span> <span class="nav-text">Install cunn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-cudnn"><span class="nav-number">5.3.</span> <span class="nav-text">Install cudnn</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-non-CUDA-related-modules"><span class="nav-number">6.</span> <span class="nav-text">Install non-CUDA-related modules</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-torch"><span class="nav-number">6.1.</span> <span class="nav-text">Install torch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-nn"><span class="nav-number">6.2.</span> <span class="nav-text">Install nn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-nngraph"><span class="nav-number">6.3.</span> <span class="nav-text">Install nngraph</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-lua-cjson"><span class="nav-number">6.4.</span> <span class="nav-text">Install lua-cjson</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-hdf5"><span class="nav-number">6.5.</span> <span class="nav-text">Install hdf5</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Some-error-cases"><span class="nav-number">7.</span> <span class="nav-text">Some error cases</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Error-No-results-matching-query-were-found"><span class="nav-number">7.1.</span> <span class="nav-text">Error: No results matching query were found.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#If-fail-to-use-luarocks-to-install"><span class="nav-number">7.2.</span> <span class="nav-text">If fail to use luarocks to install</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#If-you-want-to-check-version-of-some-packages"><span class="nav-number">7.3.</span> <span class="nav-text">If you want to check version of some packages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#If-fix-HDF5File-init-requires-a-fileID"><span class="nav-number">7.4.</span> <span class="nav-text">If fix: HDF5File.__init() requires a fileID</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Arabela Tso</p>
+  <div class="site-description" itemprop="description">May all your optimal is global.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ArabelaTso" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ArabelaTso" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://arabelatso.github.io/2020/01/05/Install%20lua5.2%20luarocks%20and%20torch7%20on%20Ubuntu18.0.4%20with%20CUDA9.1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Arabela Tso">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Arabela's Blog">
+      <meta itemprop="description" content="May all your optimal is global.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Install Torch7 using Lua5.2 on Ubuntu 18.0.4 | Arabela's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Install Torch7 using Lua5.2 on Ubuntu 18.0.4
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-01-05 00:00:00" itemprop="dateCreated datePublished" datetime="2020-01-05T00:00:00+08:00">2020-01-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-06-21 20:30:20" itemprop="dateModified" datetime="2024-06-21T20:30:20+08:00">2024-06-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Other/" itemprop="url" rel="index"><span itemprop="name">Other</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2020/01/05/Install%20lua5.2%20luarocks%20and%20torch7%20on%20Ubuntu18.0.4%20with%20CUDA9.1/" class="post-meta-item leancloud_visitors" data-flag-title="Install Torch7 using Lua5.2 on Ubuntu 18.0.4" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>This document files how to install Torch7:</p>
+<ul>
+<li>On Ubuntu 18.0.4 </li>
+<li>Lua5.2 </li>
+<li>Cuda 10.1</li>
+</ul>
+<p>本文将详细分析该协议的数据结构及迁移规则 （Murphi语言）</p>
+<span id="more"></span>
+
+
+
+<p>Official <a target="_blank" rel="noopener" href="http://torch.ch/docs/getting-started.html#installing-torch">tutorial</a> of torch 7 installation</p>
+<h2 id="Download-Torch7-from-github"><a href="#Download-Torch7-from-github" class="headerlink" title="Download Torch7 from github"></a>Download Torch7 from github</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/torch/distro.git ~/torch --recursive</span><br></pre></td></tr></table></figure>
+
+<h2 id="Install-dependencies"><a href="#Install-dependencies" class="headerlink" title="Install dependencies"></a>Install dependencies</h2><p>This step </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/torch</span><br><span class="line">bash install-deps</span><br></pre></td></tr></table></figure>
+
+<p>If error <code>Package &#39;python-software-properties&#39; has no installation  candidate</code> happens, then:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim install-deps</span><br></pre></td></tr></table></figure>
+
+<p>and fine <code>sudo apt-get install -y python-software-properties</code> , comment it out by adding <code>#</code> before this line. Like this:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">sudo apt-get install -y python-software-properties</span></span><br></pre></td></tr></table></figure>
+
+<p>Save and exit.</p>
+<h2 id="Install-Torch7"><a href="#Install-Torch7" class="headerlink" title="Install Torch7"></a>Install Torch7</h2><h3 id="With-Lua5-2"><a href="#With-Lua5-2" class="headerlink" title="With Lua5.2"></a>With Lua5.2</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TORCH_LUA_VERSION=LUA52 ./install.sh</span><br></pre></td></tr></table></figure>
+
+<h3 id="With-Lua-5-1"><a href="#With-Lua-5-1" class="headerlink" title="With Lua 5.1"></a>With Lua 5.1</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TORCH_LUA_VERSION=LUA51 ./install.sh</span><br></pre></td></tr></table></figure>
+
+<p>Then, you need to refresh your environment variables by:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<h3 id="If-failed"><a href="#If-failed" class="headerlink" title="If failed"></a>If failed</h3><p>In general, run this script directly will fail, so I cite the solution below:</p>
+<blockquote>
+<p>This script detects CUDA and attempts to install CUDA-specific lua extensions, but those installations fail because of the same GCC version issue discussed above.</p>
+<p>To work around this, edit <code>install.sh</code> and comment out anything inside of conditionals which check <code>if [ -x &quot;$path_to_nvcc&quot; ]</code>: during initial installation.</p>
+<p>[<a target="_blank" rel="noopener" href="https://www.kadamwhite.com/archives/2018/install-torch-7-and-cuda-9-1-on-ubuntu-18-04-lts">LINK</a>]</p>
+</blockquote>
+<p>After commenting out CUDA-specific lines, we can now install a non-CUDA-specific version.</p>
+<h2 id="Test-installation-success"><a href="#Test-installation-success" class="headerlink" title="Test installation success"></a>Test installation success</h2><h3 id="Test-torch"><a href="#Test-torch" class="headerlink" title="Test torch"></a>Test torch</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">th</span><br></pre></td></tr></table></figure>
+
+<p>output:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> ______             __   |  Torch7 </span><br><span class="line">/_  __/__  ________/ /   |  Scientific computing for Lua. </span><br><span class="line"> / / / _ \/ __/ __/ _ \  |  Type ? for help </span><br><span class="line">/_/  \___/_/  \__/_//_/  |  https://github.com/torch </span><br><span class="line">                         |  http://torch.ch </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Then torch7 installed successfully.</p>
+<h3 id="Test-luarocks"><a href="#Test-luarocks" class="headerlink" title="Test luarocks"></a>Test luarocks</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">luarocks list</span><br></pre></td></tr></table></figure>
+
+<p>output what you have installed.</p>
+<p>Then exit by <code>exit</code> .</p>
+<h3 id="Fully-test"><a href="#Fully-test" class="headerlink" title="Fully test"></a>Fully test</h3><p>Run <code>test.sh</code> in <code>~/torch</code>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./test.sh</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="Install-CUDA-related-modules"><a href="#Install-CUDA-related-modules" class="headerlink" title="Install CUDA-related modules"></a>Install CUDA-related modules</h2><p>With gcc-6 and g++-6</p>
+<h3 id="Install-cutorch"><a href="#Install-cutorch" class="headerlink" title="Install cutorch"></a>Install cutorch</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CC=gcc-6 CXX=g++-6 install/bin/luarocks install cutorch</span><br></pre></td></tr></table></figure>
+
+<h3 id="Install-cunn"><a href="#Install-cunn" class="headerlink" title="Install cunn"></a>Install cunn</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CC=gcc-6 CXX=g++-6 install/bin/luarocks install cunn</span><br></pre></td></tr></table></figure>
+
+<h3 id="Install-cudnn"><a href="#Install-cudnn" class="headerlink" title="Install cudnn"></a>Install cudnn</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CC=gcc-6 CXX=g++-6 install/bin/luarocks install cudnn</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="Install-non-CUDA-related-modules"><a href="#Install-non-CUDA-related-modules" class="headerlink" title="Install non-CUDA-related modules"></a>Install non-CUDA-related modules</h2><h3 id="Install-torch"><a href="#Install-torch" class="headerlink" title="Install torch"></a>Install torch</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">luarocks install torch</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Install-nn"><a href="#Install-nn" class="headerlink" title="Install nn"></a>Install nn</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">luarocks install nn</span><br></pre></td></tr></table></figure>
+
+<p>Note that <code>nn</code> needs to be installed <strong>after</strong> <code>torch</code>.</p>
+<h3 id="Install-nngraph"><a href="#Install-nngraph" class="headerlink" title="Install nngraph"></a>Install nngraph</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">luarocks install nngraph</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Install-lua-cjson"><a href="#Install-lua-cjson" class="headerlink" title="Install lua-cjson"></a>Install lua-cjson</h3><p>There are some problems in <code>cjson2.1.0.6-1</code>, so you may want to avoid this version by specifying other version, such as:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">luarocks install lua-cjson 2.1.0-1</span><br></pre></td></tr></table></figure>
+
+<p>(<a target="_blank" rel="noopener" href="https://wsonh.com/article/66.html">Link</a>)</p>
+<h3 id="Install-hdf5"><a href="#Install-hdf5" class="headerlink" title="Install hdf5"></a>Install hdf5</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libhdf5-serial-dev hdf5-tools</span><br><span class="line">git clone https://github.com/deepmind/torch-hdf5</span><br><span class="line">cd torch-hdf5</span><br><span class="line">luarocks make hdf5-0-0.rockspec </span><br></pre></td></tr></table></figure>
+
+<p>When Ubuntu &gt;13.04, run this command in the end.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LIBHDF5_LIBDIR=&quot;/usr/lib/x86_64-linux-gnu/&quot;</span><br></pre></td></tr></table></figure>
+
+<p>(<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43165871/article/details/88992354">Link</a>)</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/deepmind/torch-hdf5/pull/100/commits/539fc15ecd25b93f4d0784ea4eb75681329f9714">https://github.com/deepmind/torch-hdf5/pull/100/commits/539fc15ecd25b93f4d0784ea4eb75681329f9714</a></p>
+<h2 id="Some-error-cases"><a href="#Some-error-cases" class="headerlink" title="Some error cases"></a>Some error cases</h2><h3 id="Error-No-results-matching-query-were-found"><a href="#Error-No-results-matching-query-were-found" class="headerlink" title="Error: No results matching query were found."></a>Error: No results matching query were found.</h3><p>Please check your package name.</p>
+<p>If you are not sure about it, please </p>
+<h3 id="If-fail-to-use-luarocks-to-install"><a href="#If-fail-to-use-luarocks-to-install" class="headerlink" title="If fail to use luarocks to install"></a>If fail to use luarocks to install</h3><p>and warning with url with <code>./cache/luarocks</code>, then remove this direction</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rm -r [copy url here]</span><br></pre></td></tr></table></figure>
+
+<p>For example:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rm -r /usr/.cache/luarocks/</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="If-you-want-to-check-version-of-some-packages"><a href="#If-you-want-to-check-version-of-some-packages" class="headerlink" title="If you want to check version of some packages"></a>If you want to check version of some packages</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">luarocks search lua-cjson</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="If-fix-HDF5File-init-requires-a-fileID"><a href="#If-fix-HDF5File-init-requires-a-fileID" class="headerlink" title="If fix: HDF5File.__init() requires a fileID"></a>If fix: HDF5File.__init() requires a fileID</h3><p>Follow this <a target="_blank" rel="noopener" href="https://github.com/deepmind/torch-hdf5/pull/100/commits/539fc15ecd25b93f4d0784ea4eb75681329f9714">Link</a> to modify the corresponding files.</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpeg" alt="Arabela Tso 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpeg" alt="Arabela Tso 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/01/08/Godson-T/" rel="prev" title="Godson-T缓存一致性协议分析">
+                  <i class="fa fa-angle-left"></i> Godson-T缓存一致性协议分析
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/01/08/Install%20CUDA%20Toolkit%2010.2%20on%20Ubuntu%2018.04.3/" rel="next" title="Install CUDA Toolkit 10.2 on Ubuntu 18.04.3">
+                  Install CUDA Toolkit 10.2 on Ubuntu 18.04.3 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Arabela Tso</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/ArabelaTso" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"naaXkdnpYPUXOj8VlETpQkYr-gzGzoHsz","app_key":"N2cpd0QyqVvPeOafJtl4s0zH","server_url":"https://arabelatso.github.io/","security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+
+</body>
+</html>

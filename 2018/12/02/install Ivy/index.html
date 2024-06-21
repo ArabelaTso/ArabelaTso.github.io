@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"arabelatso.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="最合适的系统应该是ubuntu系统，且需要sudo权限。 windows和macosx系统会有诸多的限制，可能会和系统的版本不兼容导致无法运行图形界面，只能使用命令行。 本文介绍一下摸索的艰难历史。最终在mac系统下只能安装成功命令行，并且对于macosx 10.14 version， 目前图形界面是无法运行的。浪费了很多时间，真的是很不值得。记录下来，希望大家不要做无用功。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Installing IVy">
+<meta property="og:url" content="https://arabelatso.github.io/2018/12/02/install%20Ivy/index.html">
+<meta property="og:site_name" content="Arabela&#39;s Blog">
+<meta property="og:description" content="最合适的系统应该是ubuntu系统，且需要sudo权限。 windows和macosx系统会有诸多的限制，可能会和系统的版本不兼容导致无法运行图形界面，只能使用命令行。 本文介绍一下摸索的艰难历史。最终在mac系统下只能安装成功命令行，并且对于macosx 10.14 version， 目前图形界面是无法运行的。浪费了很多时间，真的是很不值得。记录下来，希望大家不要做无用功。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-12-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-06-21T12:30:20.625Z">
+<meta property="article:author" content="Arabela Tso">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://arabelatso.github.io/2018/12/02/install%20Ivy/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://arabelatso.github.io/2018/12/02/install%20Ivy/","path":"2018/12/02/install Ivy/","title":"Installing IVy"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Installing IVy | Arabela's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Arabela's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Method-1-Installing-a-release"><span class="nav-number">1.</span> <span class="nav-text">Method 1. Installing a release</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux"><span class="nav-number">1.1.</span> <span class="nav-text">Linux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows"><span class="nav-number">1.2.</span> <span class="nav-text">Windows</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mac"><span class="nav-number">1.3.</span> <span class="nav-text">Mac</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Method-2-Installing-in-a-virtual-environment-with-Vagrant"><span class="nav-number">2.</span> <span class="nav-text">Method 2. Installing in a virtual environment with Vagrant</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-1"><span class="nav-number">2.1.</span> <span class="nav-text">Windows</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-1"><span class="nav-number">2.2.</span> <span class="nav-text">Linux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MacOS"><span class="nav-number">2.3.</span> <span class="nav-text">MacOS</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Method-3-Installing-from-source"><span class="nav-number">3.</span> <span class="nav-text">Method 3. Installing from source</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisites"><span class="nav-number">3.1.</span> <span class="nav-text">Prerequisites</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Python-2-7"><span class="nav-number">3.1.1.</span> <span class="nav-text">Python 2.7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Z3"><span class="nav-number">3.1.2.</span> <span class="nav-text">Z3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python-packages"><span class="nav-number">3.1.3.</span> <span class="nav-text">Python packages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tcl-Tk-Tix"><span class="nav-number">3.1.4.</span> <span class="nav-text">Tcl&#x2F;Tk&#x2F;Tix</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ubuntu"><span class="nav-number">3.1.4.1.</span> <span class="nav-text">ubuntu</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mac"><span class="nav-number">3.1.4.2.</span> <span class="nav-text">mac</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Install-xQuartz"><span class="nav-number">3.1.4.2.1.</span> <span class="nav-text">Install xQuartz</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Install-tcl-8-5-0"><span class="nav-number">3.1.4.2.2.</span> <span class="nav-text">Install tcl 8.5.0</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Install-tk-8-5-0"><span class="nav-number">3.1.4.2.3.</span> <span class="nav-text">Install tk 8.5.0</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Install-tix-8-4-2"><span class="nav-number">3.1.4.2.4.</span> <span class="nav-text">Install tix 8.4.2</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-IVy"><span class="nav-number">3.2.</span> <span class="nav-text">Install IVy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ubuntu"><span class="nav-number">3.2.1.</span> <span class="nav-text">Ubuntu</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Run"><span class="nav-number">3.3.</span> <span class="nav-text">Run</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-notes"><span class="nav-number">3.4.</span> <span class="nav-text">Windows notes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Installing-Python-and-Python-packages"><span class="nav-number">3.4.1.</span> <span class="nav-text">Installing Python and Python packages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Installing-Z3"><span class="nav-number">3.4.2.</span> <span class="nav-text">Installing Z3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Installing-Graphviz"><span class="nav-number">3.4.3.</span> <span class="nav-text">Installing Graphviz</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-scripts"><span class="nav-number">3.4.4.</span> <span class="nav-text">Using scripts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Installing-Pygraphviz"><span class="nav-number">3.4.5.</span> <span class="nav-text">Installing Pygraphviz</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Installing-Ivy"><span class="nav-number">3.4.6.</span> <span class="nav-text">Installing Ivy</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mac-notes"><span class="nav-number">3.5.</span> <span class="nav-text">Mac notes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#XQuartz"><span class="nav-number">3.5.1.</span> <span class="nav-text">XQuartz</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XCode"><span class="nav-number">3.5.2.</span> <span class="nav-text">XCode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MacPorts"><span class="nav-number">3.5.3.</span> <span class="nav-text">MacPorts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-prerequisites"><span class="nav-number">3.5.4.</span> <span class="nav-text">Install prerequisites</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-Z3"><span class="nav-number">3.5.5.</span> <span class="nav-text">Install Z3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-IVy-1"><span class="nav-number">3.5.6.</span> <span class="nav-text">Install IVy</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">3.6.</span> <span class="nav-text">Reference</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Arabela Tso</p>
+  <div class="site-description" itemprop="description">May all your optimal is global.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ArabelaTso" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ArabelaTso" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://arabelatso.github.io/2018/12/02/install%20Ivy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Arabela Tso">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Arabela's Blog">
+      <meta itemprop="description" content="May all your optimal is global.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Installing IVy | Arabela's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Installing IVy
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-12-02 00:00:00" itemprop="dateCreated datePublished" datetime="2018-12-02T00:00:00+08:00">2018-12-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-06-21 20:30:20" itemprop="dateModified" datetime="2024-06-21T20:30:20+08:00">2024-06-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BD%A2%E5%BC%8F%E5%8C%96%E6%96%B9%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">形式化方法</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2018/12/02/install%20Ivy/" class="post-meta-item leancloud_visitors" data-flag-title="Installing IVy" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>最合适的系统应该是ubuntu系统，且需要sudo权限。</p>
+<p>windows和macosx系统会有诸多的限制，可能会和系统的版本不兼容导致无法运行图形界面，只能使用<strong>命令行</strong>。</p>
+<p>本文介绍一下摸索的艰难历史。最终在mac系统下只能安装成功命令行，并且对于macosx 10.14 version， 目前<strong>图形界面是无法运行的</strong>。浪费了很多时间，真的是很不值得。记录下来，希望大家不要做无用功。</p>
+</blockquote>
+<span id="more"></span>
+
+
+
+<p>有三种方法可以安装ivy，分别是：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="http://microsoft.github.io/ivy/install.html#release">Install a binary release</a></li>
+<li><a target="_blank" rel="noopener" href="http://microsoft.github.io/ivy/install.html#vagrant">Install from source in a virtual environment with Vagrant</a></li>
+<li><a target="_blank" rel="noopener" href="http://microsoft.github.io/ivy/install.html#source">Install from source</a></li>
+</ol>
+<p>主页：<a target="_blank" rel="noopener" href="http://microsoft.github.io/ivy/install.html#vagrant">http://microsoft.github.io/ivy/install.html#vagrant</a></p>
+<h1 id="Method-1-Installing-a-release"><a href="#Method-1-Installing-a-release" class="headerlink" title="Method 1. Installing a release"></a>Method 1. Installing a release</h1><p>Binary releases of IVy are available on <a target="_blank" rel="noopener" href="https://github.com/Microsoft/ivy/releases">IVy’s Github release page</a>.</p>
+<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><p>最方便的安装方式，直接下载、安装即可。记得要有sudo权限，否则安装失败。</p>
+<p>On Debian-based linux ditributions such as Ubuntu, download and install the file <code>ms-ivy_X.X_YYYY.deb</code> where <code>X.X</code> is the IVy version and <code>YYYY</code> is the machine architecture. Use your system’s package manager to install this package, or the following commands:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo dpkg -i ms-ivy_X.X_YYYY.deb</span><br><span class="line">$ sudo apt-get install -f</span><br></pre></td></tr></table></figure>
+
+<p>The first command will report missing dependencies, which will be installed by the second command.</p>
+<h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><p>windows 下载zip包之后，解压。在32位和64位电脑上都可以。</p>
+<p>直接使用命令行，那么直接激活就行。</p>
+<p>The Windows binary distribution is in the form of a zip archive. Download the file <code>ivy.X.Y-.Windows-z86.zip</code>, where <code>X.X</code> is the IVy version (this will work on both 32-bit and 64 bit Intel Windows). Use Windows Explorer to extract this archive in the directory <code>C:\</code>. This should give you a directory <code>C:\ivy</code>. To use IVy in a command window, first execute this command:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; C:\ivy\scripts\activate</span><br></pre></td></tr></table></figure>
+
+<p>这个方法可以激活一个虚拟环境，不过是命令行的。图形界面无法使用。</p>
+<h2 id="Mac"><a href="#Mac" class="headerlink" title="Mac"></a>Mac</h2><p>Mac下还没有可用的binary release，要用另外两种方法。</p>
+<h1 id="Method-2-Installing-in-a-virtual-environment-with-Vagrant"><a href="#Method-2-Installing-in-a-virtual-environment-with-Vagrant" class="headerlink" title="Method 2. Installing in a virtual environment with Vagrant"></a>Method 2. Installing in a virtual environment with Vagrant</h1><p>方法2是直接安装一个虚拟环境vagrant。</p>
+<h2 id="Windows-1"><a href="#Windows-1" class="headerlink" title="Windows"></a>Windows</h2><p>windows下就是直接用虚拟机virtualbox来跑。</p>
+<p>On Windows, <a target="_blank" rel="noopener" href="https://virtualbox.org/">Virtualbox</a> is currently the recommended container provider.</p>
+<ol>
+<li>Clone the <code>IVy</code> repository (e.g. <code>git clone https://github.com/Microsoft/ivy.git</code>).</li>
+<li>Download and install <a target="_blank" rel="noopener" href="https://www.vagrantup.com/">Vagrant</a>.</li>
+<li>Download and install <a target="_blank" rel="noopener" href="http://virtualbox.org/">Virtualbox</a>.</li>
+<li>Type <code>vagrant plugin install vagrant-vbguest</code> to install the <a target="_blank" rel="noopener" href="https://github.com/dotless-de/vagrant-vbguest"><code>vagrant-vbguest</code></a>plugin (optional but recommended).</li>
+<li>Download and install an X11 server for Windows (e.g. <a target="_blank" rel="noopener" href="http://www.straightrunning.com/XmingNotes/">Xming</a>).</li>
+<li>Type <code>vagrant up</code> <a target="_blank" rel="noopener" href="https://github.com/mitchellh/vagrant/issues/3854">from an administrator console</a> to prepare a new development environment. This is likely to take some time to complete the first time it is done, because <a target="_blank" rel="noopener" href="https://github.com/Z3Prover/z3">z3</a> must be compiled from its sources.</li>
+<li>Launch your X11 server and type <code>vagrant ssh</code> in a console window to get access to IVy from a shell within the container.</li>
+</ol>
+<h2 id="Linux-1"><a href="#Linux-1" class="headerlink" title="Linux"></a>Linux</h2><p>On Linux, <a target="_blank" rel="noopener" href="https://docker.com/">Docker</a> is also available as a container provider, and will yield better performance than the Virtualbox backend.</p>
+<ol>
+<li>Clone the <code>IVy</code> repository (e.g. <code>git clone https://github.com/Microsoft/ivy.git</code>).</li>
+<li>Install <a target="_blank" rel="noopener" href="https://www.vagrantup.com/">Vagrant</a>.</li>
+<li>Install <a target="_blank" rel="noopener" href="https://docker.com/">Docker</a>.</li>
+<li>(Debian-based systems) Ensure your user is in the <code>docker</code> group.</li>
+<li>Type <code>vagrant up --provider=docker</code>.</li>
+<li>Type <code>vagrant ssh</code> to get access to IVy from a shell.</li>
+</ol>
+<p>Linux users also have the option of directly executing the provisioning scripts in the <code>scripts/setup</code> directory, bypassing any inconvenience a container might impose. The scripts are divided in such a way as to facilitate this. Those interested should take note, however, that the scripts have only been tested with Ubuntu and Debian Vagrant guest images so far.</p>
+<h2 id="MacOS"><a href="#MacOS" class="headerlink" title="MacOS"></a>MacOS</h2><p>使用方法不稳定，与版本不兼容。所以这个方法在mac上也无法适用。</p>
+<h1 id="Method-3-Installing-from-source"><a href="#Method-3-Installing-from-source" class="headerlink" title="Method 3. Installing from source"></a>Method 3. Installing from source</h1><h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><h3 id="Python-2-7"><a href="#Python-2-7" class="headerlink" title="Python 2.7"></a>Python 2.7</h3><p>注意，这个版本很重要，因为其他版本的安装有问题。2.7.x都可以，但是2的其他subversion就不行，很迷醉。（因为z3指定了要用py2.7）</p>
+<p>Get it from <a target="_blank" rel="noopener" href="https://www.python.org/downloads">here</a> or as part of your Linux distribution. You should make sure to get the <code>pip</code>utility. This is standard on versions from 2.7.9.</p>
+<p>You can install IVy in a python virtual environment if you don’t want to pollute your local python setup. If you want to use a virtual environment, do the following before following the remaining installation instructions:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ pip install virtualenv</span><br><span class="line">$ virtualenv ivy_env</span><br><span class="line">$ cd ivy_env</span><br><span class="line">$ . bin/activate</span><br></pre></td></tr></table></figure>
+
+<p>这个启动之后，之后的安装都是在(ivy_env) 的这个虚拟环境下安装的。也可以不激活这个虚拟环境，不激活的话相当于你在本机上直接安装；虚拟环境下安装则不影响本机原先的环境变量。</p>
+<h3 id="Z3"><a href="#Z3" class="headerlink" title="Z3"></a>Z3</h3><p>z3是一个定理证明器，ivy依赖于z3，所以需要安装z3. </p>
+<p>请注意！！ z3 只能支持在python2.7的版本下运行，所以一定一定要注意！！尽管有的时候z3也能在python3.x的版本下import成功，但是跑出来的结果是不一样的，或无法出结果，说明在py3上的性能和支持还是不稳定，会浪费很多时间。</p>
+<p>安装方式： <a target="_blank" rel="noopener" href="https://github.com/Z3Prover/z3">here</a> </p>
+<p>安装成功测试：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python</span><br><span class="line">&gt;&gt;&gt; import z3</span><br></pre></td></tr></table></figure>
+
+<p>看看是否能import成功，如果可以的话则说明成功。也可以运行z3里面的例子直接试试看。</p>
+<p>如果想要安装z3在刚刚新建的ivy_env的虚拟环境下，则在安装z3的时候注明前缀：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ make install PREFIX=/path/to/ivy_env</span><br></pre></td></tr></table></figure>
+
+<p>这个虚拟环境的路径，其实就是刚刚新建的那个ivy_env的那个环境的路径。</p>
+<h3 id="Python-packages"><a href="#Python-packages" class="headerlink" title="Python packages"></a>Python packages</h3><p>要安装的python包包括： <code>ply</code>, <code>pygraphviz</code> and <code>tarjan</code>. </p>
+<p>On Ubuntu：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install python-ply python-pygraphviz</span><br><span class="line">$ pip install tarjan</span><br></pre></td></tr></table></figure>
+
+<p>如果只用ivy 命令行的话， 可以不用安装<code>python-pygraphviz</code>，这个是用来交互地显示图形界面的。</p>
+<p>注意版本：</p>
+<p>Make sure you get version <u>3.4 of python-ply</u> as some later versions are broken. </p>
+<p>As an alternative, <code>pip</code> can install all the packages, but you need to make sure the dependencies on system packages are met:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install graphviz graphviz-dev python-dev</span><br><span class="line">$ pip install ply pygraphviz tarjan</span><br></pre></td></tr></table></figure>
+
+<p>This latter is the option if you are making a virtual environment.</p>
+<h3 id="Tcl-Tk-Tix"><a href="#Tcl-Tk-Tix" class="headerlink" title="Tcl&#x2F;Tk&#x2F;Tix"></a>Tcl&#x2F;Tk&#x2F;Tix</h3><p>这几个包是用来显示交互界面的，如果只打算用命令行，则这一步可以跳过。（macosx 10.14以上目前是无法成功安装这些包的，就算显示安装成功，也无法正常使用，请一定注意，不要在这里浪费时间！目前macosx 10.14以上版本无法使用ivy的图形界面！）</p>
+<h4 id="ubuntu"><a href="#ubuntu" class="headerlink" title="ubuntu"></a>ubuntu</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install python-tk tix</span><br></pre></td></tr></table></figure>
+
+<p>This step is <u>not necessary</u> if using the IVy command line tools only.</p>
+<h4 id="mac"><a href="#mac" class="headerlink" title="mac"></a>mac</h4><p>尽管在v-10.14下无法正常使用，但是还是记录一下自己的摸索过程，为更低级版本的mac系统更好的使用。</p>
+<p>安装的版本也很重要，因为tcl 4.x, tk 4.x 和tix 6.x 是无法兼容的。这个一开始我还不相信，后来发现这几个版本是无法兼容的，所以不要一味下载最新的版本，它们是不兼容的，也安装不成功。</p>
+<p>以下的步骤，请一定要按照顺序、版本来安装。是可以安装成功的，但是无法成功运行。这个就是mac系统与这些库还无法兼容的原因。</p>
+<p><strong>注意</strong>：</p>
+<p>以下安装包的安装路径，<strong>一定不要包括奇怪的字符</strong>，如空格、中文等，不然安装时的make会无法成功，之后处理起来也很麻烦！</p>
+<h5 id="Install-xQuartz"><a href="#Install-xQuartz" class="headerlink" title="Install xQuartz"></a>Install xQuartz</h5><p><a target="_blank" rel="noopener" href="http://xquartz.macosforge.org/">xQuartz</a></p>
+<p>这个直接安装就行，是为之后tix做准备的</p>
+<h5 id="Install-tcl-8-5-0"><a href="#Install-tcl-8-5-0" class="headerlink" title="Install tcl 8.5.0"></a>Install tcl 8.5.0</h5><p><a target="_blank" rel="noopener" href="http://www.tcl.tk/software/tcltk/download.html">http://www.tcl.tk/software/tcltk/download.html</a> 这里能下载最新版本</p>
+<p><a target="_blank" rel="noopener" href="https://sourceforge.net/projects/tcl/files/Tcl/">https://sourceforge.net/projects/tcl/files/Tcl/</a> 在这里能找到各个版本</p>
+<p>请注意，最好下载8.5.0，其他的更高版本，试用了之后发现各种问题。下载、解压之后：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd tcl8.5.0/unix</span><br><span class="line">./configure --enable-shared</span><br><span class="line">make</span><br><span class="line">make test</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ul>
+<li><p><code>configure</code> 后面的<code>--enable-shared</code>是为了让这个tcl可以被之后的tk用到</p>
+</li>
+<li><p>如果想安装在虚拟环境下，则需要在<code>configure</code>之后加上<code>--prefix=/path/to/ivy_env</code></p>
+</li>
+<li><p><code>make</code> 想加速的话，在后面加上<code>-j 2</code>或者其他更大的数字，用来指定几核make</p>
+</li>
+<li><p>最后的<code>make install</code>要sudo，不然会失败。</p>
+</li>
+<li><p><code>make test</code>会花费一定的时间，是在跑所有的测试样例，这一步可有可无。</p>
+</li>
+</ul>
+<h5 id="Install-tk-8-5-0"><a href="#Install-tk-8-5-0" class="headerlink" title="Install tk 8.5.0"></a>Install tk 8.5.0</h5><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ./Tk8<span class="number">.5</span><span class="number">.0</span>/unix</span><br><span class="line">./configure --enable-shared</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ul>
+<li>一定要<code>--enable-shared</code>， 不然之后的tix无法使用它</li>
+<li>如果系统中有多个tcl，也可以在<code>configure</code>的后面指定是哪个版本的tcl: <code>--with-tcl=/path/to/tcl</code></li>
+<li>这里的<code>make</code>如果失败，提示<code>permission deny</code>，则加上<code>sudo</code>。</li>
+</ul>
+<h5 id="Install-tix-8-4-2"><a href="#Install-tix-8-4-2" class="headerlink" title="Install tix 8.4.2"></a>Install tix 8.4.2</h5><p>一定要下载这个版本：tix 8.4.2。这个版本是稳定的，下载地址：</p>
+<p><a target="_blank" rel="noopener" href="http://tix.sourceforge.net/download.shtml">http://tix.sourceforge.net/download.shtml</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd ./Tix8.4.2/unix</span><br><span class="line">./configure LDFLAGS=&quot;-L/usr/X11/lib&quot; --enable-shared</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ul>
+<li>在<code>configure</code>后面的<code>LDFLAGS</code>是用来指定这个X11的库的，也就是之前安装的那个xQuartz</li>
+<li>如果需要指定它相匹配的tcl和tk，可以在<code>configure</code>后面再加上<code>--with-tcl=/path/to/tcl </code>和<code>--with-tk=/path/to/tk</code> </li>
+<li>这里的<code>make</code>或者<code>make install</code>如果失败，提示<code>permission deny</code>，则加上<code>sudo</code></li>
+<li>如果提示语法错误，则说明该tix 与之前的tk, tcl版本不兼容</li>
+</ul>
+<p>特别提示：</p>
+<blockquote>
+<p><strong>If you are using macOS 10.7 or later</strong>, the Apple-supplied Tcl&#x2F;Tk 8.5 still has serious bugs that can cause application crashes. If you wish to use IDLE or Tkinter, install and use a newer version of Python and of Tcl&#x2F;Tk. </p>
+<p>​									摘自：<a target="_blank" rel="noopener" href="https://www.python.org/download/mac/tcltk/">https://www.python.org/download/mac/tcltk/</a></p>
+</blockquote>
+<p>也就是说，如果是macOS 10.7以上的版本，只能用tcl\tk 8.5 以上的版本。但是如果用8.5以上的版本，则无法与tix兼容，无法正确安装。所以至此，我在本机上的艰难尝试就告一段落了。。终于决定还是止步于命令行吧。</p>
+<h2 id="Install-IVy"><a href="#Install-IVy" class="headerlink" title="Install IVy"></a>Install IVy</h2><h3 id="Ubuntu"><a href="#Ubuntu" class="headerlink" title="Ubuntu"></a>Ubuntu</h3><p>Get the source like this:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/Microsoft/ivy.git</span><br><span class="line">$ cd ivy</span><br></pre></td></tr></table></figure>
+
+<p>普通用户：</p>
+<p>Install into your local Python like this</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo python setup.py install</span><br></pre></td></tr></table></figure>
+
+
+
+<p>开发者：</p>
+<p>If you want to run from the source tree for development purposes, do this instead:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo python setup.py develop</span><br></pre></td></tr></table></figure>
+
+
+
+<p>可以指定安装路径：</p>
+<p>If you don’t want to do a system-wide install (and you aren’t using a virtual environment) there are various ways to install in your home directory. For example:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ python setup.py install --home=~</span><br></pre></td></tr></table></figure>
+
+<p>See the <a target="_blank" rel="noopener" href="https://docs.python.org/2/install/">python documentation</a> for general instructions on installing python packages.</p>
+<h2 id="Run"><a href="#Run" class="headerlink" title="Run"></a>Run</h2><p>图形界面的示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd doc/examples</span><br><span class="line">$ ivy client_server_example.ivy</span><br></pre></td></tr></table></figure>
+
+<p>命令行的示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd doc/examples</span><br><span class="line">ivy_show isolate=iso_l pingpong.ivy </span><br></pre></td></tr></table></figure>
+
+<p>或者：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd doc/examples</span><br><span class="line">ivy_check client_server_example.ivy</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Windows-notes"><a href="#Windows-notes" class="headerlink" title="Windows notes"></a>Windows notes</h2><p>这个是在windows下安装的一些不同之处。因为没有试过在windows下安装，所以不确定是否有效。但还是摘录如下。</p>
+<p>Installing on Windows can be a bit challenging, but here are a few suggestions that may get you through it.</p>
+<h3 id="Installing-Python-and-Python-packages"><a href="#Installing-Python-and-Python-packages" class="headerlink" title="Installing Python and Python packages"></a>Installing Python and Python packages</h3><p>Install Python 2.7.11 in the normal way. Before installing packages, you may also need to install the <a target="_blank" rel="noopener" href="http://aka.ms/vcpython27">Visual C++ compiler for Python</a>.</p>
+<h3 id="Installing-Z3"><a href="#Installing-Z3" class="headerlink" title="Installing Z3"></a>Installing Z3</h3><p>After installing Z3, you need to make sure Python can find it. You can try setting the <code>PYTHONPATH</code> environment variable to point to the Z3 <code>python</code> directory. It might help to make sure Z3 is installed in a directory without spaces in the name. As a last resort, you can just copy the <code>python/z3</code> directory into your Python installation. If you installed Python in <code>c:/Python27</code>, then copy it into:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c:/Python27/lib/site-packages/z3</span><br></pre></td></tr></table></figure>
+
+<p>If things are installed correctly, the following should produce no errors:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; python</span><br><span class="line">&gt;&gt;&gt; import z3</span><br><span class="line">&gt;&gt;&gt; z3.init(&#x27;libz3.dll&#x27;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Installing-Graphviz"><a href="#Installing-Graphviz" class="headerlink" title="Installing Graphviz"></a>Installing Graphviz</h3><p>Get <code>graphviz-2.38</code> from <a target="_blank" rel="noopener" href="http://graphviz.org/">graphviz.org</a>. This site is often down, so you may have to be patient. Versions downloaded from alternative sites may be broken. Install into some directory without spaces in the name, for example <code>c:/Graphviz</code>.</p>
+<h3 id="Using-scripts"><a href="#Using-scripts" class="headerlink" title="Using scripts"></a>Using scripts</h3><p>The <code>pip</code> package installation utility is found in <code>c:/Python27/Scripts</code>. You should put this directory in your <code>PATH</code>, since the IVY command line scripts will also be installed there by default. Try installing the <code>tarjan</code> and <code>ply</code> packages like this:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; pip install tarjan</span><br><span class="line">&gt; pip install ply</span><br></pre></td></tr></table></figure>
+
+<h3 id="Installing-Pygraphviz"><a href="#Installing-Pygraphviz" class="headerlink" title="Installing Pygraphviz"></a>Installing Pygraphviz</h3><p>You can try installing <code>pygraphviz</code> like this:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; pip install pygraphviz</span><br></pre></td></tr></table></figure>
+
+<p>However, this is likely to fail as <code>pip</code> will not find the graphviz headers and libraries. As an alternative, download the release 1.3 of <code>pygraphviz</code> from <a target="_blank" rel="noopener" href="https://github.com/pygraphviz/pygraphviz/releases">here</a>. After unpacking the sources, do this:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; cd pygraphviz-pygraphviz-1.3</span><br><span class="line">&gt; python setup.py install --include-path=c:/Graphviz/include --library-path=c:/Graphviz/lib/debug/lib</span><br></pre></td></tr></table></figure>
+
+<p>This tells explicitly where you installed the graphviz headers and libraries. If this seems to work, you can test it like this:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; python</span><br><span class="line">&gt;&gt;&gt; import pygraphviz.agraph</span><br></pre></td></tr></table></figure>
+
+<h3 id="Installing-Ivy"><a href="#Installing-Ivy" class="headerlink" title="Installing Ivy"></a>Installing Ivy</h3><p>Now you can now try to install Ivy, like this:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; git clone https://github.com/Microsoft/ivy.git</span><br><span class="line">&gt; cd ivy</span><br><span class="line">&gt; python setup.py install</span><br></pre></td></tr></table></figure>
+
+<p>If you have put <code>c:/Python27/Scripts</code> in your <code>PATH</code>, you should now be able to run IVy like this:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; ivy ui=cti doc/examples/client_server_example.ivy</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Mac-notes"><a href="#Mac-notes" class="headerlink" title="Mac notes"></a>Mac notes</h2><p>Mac上的安装如下，一定要安装XQuartz、MacPorts和Xcode。</p>
+<p>There are two options for Mac users: using the native Aqua interface or X11. Here we will describe the X11 approach.</p>
+<h3 id="XQuartz"><a href="#XQuartz" class="headerlink" title="XQuartz"></a>XQuartz</h3><p>Install <a target="_blank" rel="noopener" href="https://www.xquartz.org/">XQuartz</a>.</p>
+<h3 id="XCode"><a href="#XCode" class="headerlink" title="XCode"></a>XCode</h3><p>Install <a target="_blank" rel="noopener" href="https://itunes.apple.com/us/app/xcode/id497799835?ls=1&mt=12">Xcode</a>.</p>
+<p>Xcode的安装需要很长的时间</p>
+<h3 id="MacPorts"><a href="#MacPorts" class="headerlink" title="MacPorts"></a>MacPorts</h3><p>Install <a target="_blank" rel="noopener" href="https://www.macports.org/">MacPorts</a>.</p>
+<h3 id="Install-prerequisites"><a href="#Install-prerequisites" class="headerlink" title="Install prerequisites"></a>Install prerequisites</h3><p>这些python包用Method2中的方法安装会失败，但是用port安装就可以。但是port一定要先安装成功XCode才能使用，否则会报错。</p>
+<p>安装成功XCode 之后，用port安装如下这些包，就可以成功。用<code>brew</code>,<code>easy_install</code>，<code>pip</code>都无法成功（不是无法安装，而是显示安装成功，却无法正常使用）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo port install graphviz python27 py27-pip py27-pygraphviz py27-ply py27-tkinter tix git</span><br><span class="line">$ sudo pip install tarjan</span><br></pre></td></tr></table></figure>
+
+<h3 id="Install-Z3"><a href="#Install-Z3" class="headerlink" title="Install Z3"></a>Install Z3</h3><p>z3 这个记得安装的python版本是2.7，比较稳定</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ unzip z3-4.4.1-x64-osx-10.11.zip</span><br><span class="line">$ export PYTHONPATH=`pwd`/z3-4.4.1-x64-osx-10.11/bin:</span><br></pre></td></tr></table></figure>
+
+<h3 id="Install-IVy-1"><a href="#Install-IVy-1" class="headerlink" title="Install IVy"></a>Install IVy</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/Microsoft/ivy.git</span><br><span class="line">$ cd ivy</span><br><span class="line">$ sudo python2.7 setup.py install</span><br><span class="line">$ export PATH=&quot;/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH&quot;</span><br></pre></td></tr></table></figure>
+
+<p>The last command is to make the ivy command-line scripts available. </p>
+<p>运行完最后一行之后，再运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd doc/examples</span><br><span class="line">$ ivy client_server_example.ivy</span><br></pre></td></tr></table></figure>
+
+<p>虽然可以运行，但是久久不能出结果。</p>
+<p>官网上是这么说的：</p>
+<blockquote>
+<p>For some reason, the first time you run ivy, it takes several minutes to start. </p>
+</blockquote>
+<p>但是经过测试，，发现几个小时都没有出结果。。不知道是什么原因。。macosx目前还是乖乖用命令行吧。。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>How-to-install-tix-on-mac-os-x: <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/16797444/how-to-install-tix-on-mac-os-x">https://stackoverflow.com/questions/16797444/how-to-install-tix-on-mac-os-x</a></p>
+<p>tcl-tk: <a target="_blank" rel="noopener" href="http://www.tcl.tk/doc/howto/compile.html">http://www.tcl.tk/doc/howto/compile.html</a></p>
+<p>官网：<a target="_blank" rel="noopener" href="http://microsoft.github.io/ivy/install.html">http://microsoft.github.io/ivy/install.html</a></p>
+<p>IDLE and tkinter with Tcl&#x2F;Tk on macOS： <a target="_blank" rel="noopener" href="https://www.python.org/download/mac/tcltk/">https://www.python.org/download/mac/tcltk/</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpeg" alt="Arabela Tso 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpeg" alt="Arabela Tso 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/11/06/how-to-read-paper/" rel="prev" title="How to read a paper">
+                  <i class="fa fa-angle-left"></i> How to read a paper
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/12/06/Ocaml%20Install/" rel="next" title="Pre-preparation for paraVerifier (Eng. ver)">
+                  Pre-preparation for paraVerifier (Eng. ver) <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Arabela Tso</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/ArabelaTso" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"naaXkdnpYPUXOj8VlETpQkYr-gzGzoHsz","app_key":"N2cpd0QyqVvPeOafJtl4s0zH","server_url":"https://arabelatso.github.io/","security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+
+</body>
+</html>

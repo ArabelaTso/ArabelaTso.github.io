@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"arabelatso.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文为在Mac下配置Latex的方法 内附具体步骤及下载地址">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mac下配置Latex的方法">
+<meta property="og:url" content="https://arabelatso.github.io/2017/03/17/latex-on-mac/index.html">
+<meta property="og:site_name" content="Arabela&#39;s Blog">
+<meta property="og:description" content="本文为在Mac下配置Latex的方法 内附具体步骤及下载地址">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-03-16T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-06-21T12:30:20.445Z">
+<meta property="article:author" content="Arabela Tso">
+<meta property="article:tag" content="computer, latex">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://arabelatso.github.io/2017/03/17/latex-on-mac/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://arabelatso.github.io/2017/03/17/latex-on-mac/","path":"2017/03/17/latex-on-mac/","title":"Mac下配置Latex的方法"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Mac下配置Latex的方法 | Arabela's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Arabela's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MacTex"><span class="nav-number">1.</span> <span class="nav-text">MacTex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sublime-%E5%8F%8A%E5%85%B6%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">Sublime 及其配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sublime"><span class="nav-number">2.1.</span> <span class="nav-text">Sublime</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85package-control"><span class="nav-number">2.2.</span> <span class="nav-text">安装package control</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Latextool"><span class="nav-number">2.3.</span> <span class="nav-text">安装Latextool</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Skim"><span class="nav-number">3.</span> <span class="nav-text">Skim</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E6%96%87%E6%A1%A3"><span class="nav-number">4.</span> <span class="nav-text">编译文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E9%85%8D%E7%BD%AEtex%E7%BC%96%E8%AF%91%E5%99%A8%E5%92%8C%E4%B8%AD%E6%96%87%E6%94%AF%E6%8C%81"><span class="nav-number">5.</span> <span class="nav-text">关于配置tex编译器和中文支持</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%951"><span class="nav-number">5.1.</span> <span class="nav-text">方法1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%952"><span class="nav-number">5.2.</span> <span class="nav-text">方法2</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Arabela Tso</p>
+  <div class="site-description" itemprop="description">May all your optimal is global.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ArabelaTso" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ArabelaTso" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://arabelatso.github.io/2017/03/17/latex-on-mac/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Arabela Tso">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Arabela's Blog">
+      <meta itemprop="description" content="May all your optimal is global.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Mac下配置Latex的方法 | Arabela's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Mac下配置Latex的方法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-03-17 00:00:00" itemprop="dateCreated datePublished" datetime="2017-03-17T00:00:00+08:00">2017-03-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-06-21 20:30:20" itemprop="dateModified" datetime="2024-06-21T20:30:20+08:00">2024-06-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%85%8D%E7%BD%AE/" itemprop="url" rel="index"><span itemprop="name">计算机配置</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2017/03/17/latex-on-mac/" class="post-meta-item leancloud_visitors" data-flag-title="Mac下配置Latex的方法" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>本文为在Mac下配置Latex的方法</p>
+<p>内附具体步骤及下载地址</p>
+<span id="more"></span>
+
+<p>因为Latex的更新，所以找的很多配置的方法总是出错。要么找不到文件，要么方法已经不适用。所以赶紧来更一下配置成功的方法。</p>
+<blockquote>
+<p>本机环境为：MacPro 13 Retina. Version 10.12.3</p>
+</blockquote>
+<p>总共有3个步骤。具体如下：</p>
+<ul>
+<li>编译器：MacTex</li>
+<li>Tex代码编写：Sublime （版本2 或 3）</li>
+<li>pdf显示：Skim</li>
+</ul>
+<p>下面具体介绍一下每一步的做法。</p>
+<h2 id="MacTex"><a href="#MacTex" class="headerlink" title="MacTex"></a>MacTex</h2><p>下载地址： <a target="_blank" rel="noopener" href="http://tug.org/mactex/">http://tug.org/mactex/</a>     </p>
+<p>点击： <a target="_blank" rel="noopener" href="http://tug.org/mactex/mactex-download.html"><strong>MacTeX Download</strong></a>. </p>
+<p>占用的空间好大，2G-4G左右。会安装大约4个Latex套件（Texshop, BibTex, LaTeXiT, Tex Live Utility）</p>
+<h2 id="Sublime-及其配置"><a href="#Sublime-及其配置" class="headerlink" title="Sublime 及其配置"></a>Sublime 及其配置</h2><h3 id="Sublime"><a href="#Sublime" class="headerlink" title="Sublime"></a>Sublime</h3><p>下载地址：  <a target="_blank" rel="noopener" href="http://www.sublimetext.com/3">http://www.sublimetext.com/3</a></p>
+<p>选择：<a target="_blank" rel="noopener" href="https://download.sublimetext.com/Sublime%20Text%20Build%203126.dmg">OS X</a> (10.7 or later is required) 进行下载</p>
+<h3 id="安装package-control"><a href="#安装package-control" class="headerlink" title="安装package control"></a>安装package control</h3><ul>
+<li>打开sublime</li>
+<li>ctrl+&#96; ， 也就是esc下面的键。打开了sublime的控制台。</li>
+<li>根据不同版本，在<a href="%5Bhttps://sublime.wbond.net/installation%5D(https://sublime.wbond.net/installation)">here</a>找到sublime2或3的python代码，粘贴进去，回车，就会自动开始下载package control</li>
+<li>重启一下sublime</li>
+</ul>
+<h3 id="安装Latextool"><a href="#安装Latextool" class="headerlink" title="安装Latextool"></a>安装Latextool</h3><ul>
+<li>在sublime中，摁<code>ctrl+shift+p</code>打开管理器，会在sublime上面出现一行输入框</li>
+<li>输入install，回车</li>
+<li>输入Latextools，下载</li>
+<li>sublime下方会出现正在下载的提示，会有一个横线来回跑跑跑，然后提示下载成功</li>
+</ul>
+<p><strong>注意：</strong>因为很多教程会说，安装好之后要reconfigure and migrate settings ，比如这个<a target="_blank" rel="noopener" href="http://blog.csdn.net/songrotek/article/details/46457571">link</a>，但是因为时间是15年的，而16年的时候Latex经过更新，亲测已经找不到这个选项了，所以<strong>不用</strong>白费力气去找要reconfigure之类的。</p>
+<h2 id="Skim"><a href="#Skim" class="headerlink" title="Skim"></a>Skim</h2><p>Skim是一个pdf阅读器，可以跟sublime同步，使得在Sublime中写好了Tex文件之后，可以直接编译，然后同步生成到Skim，再用Skim打开。过程一步到位，很方便～</p>
+<ul>
+<li><p>下载地址：<a target="_blank" rel="noopener" href="http://skim-app.sourceforge.net/">http://skim-app.sourceforge.net</a></p>
+</li>
+<li><p>安装</p>
+</li>
+<li><p>打开skim（发现它没有什么界面），在上面的菜单栏里选择preference</p>
+</li>
+<li><p>点击“同步”，看到“预设”里可以选择“sublime text”，选择了之后，下面的“命令”和“参数”也会<strong>自动</strong>调整为“subl”和“%file”：%line。（如果是英文版的，就是sync -&gt; preset修改成sublime Text）</p>
+</li>
+</ul>
+<h2 id="编译文档"><a href="#编译文档" class="headerlink" title="编译文档"></a>编译文档</h2><p>做完以上三个步骤，就完成了最基本的latex编译环境。直接在sublime中新建一个文件，写上一些tex代码，比如：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\documentclass</span>&#123;article&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\usepackage</span>&#123;fontspec, xunicode, xltxtra&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\setmainfont</span>&#123;Hiragino Sans GB&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\title</span>&#123;Title&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\author</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\begin</span>&#123;document&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\maketitle</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">\section</span>&#123;Introduction&#125;</span><br><span class="line"></span><br><span class="line">This is introduction section</span><br><span class="line"></span><br><span class="line"><span class="keyword">\end</span>&#123;document&#125;</span><br></pre></td></tr></table></figure>
+
+<p>保存，记得以 <code>.tex</code> 结尾，如<code>test.tex</code>，之后<code>command + b</code> 进行编译。如果无法运行，则见下一个“<strong>关于配置和中文支持</strong>”，如果可以运行，则将直接从skim生成一个pdf。</p>
+<p>【更新于2017.9.18】编译的时候可能会提示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TraditionalBuilder: Your custom command does not allow the engine to be selected</span><br></pre></td></tr></table></figure>
+
+<p>看了很多更改的方法都没有用，却发现这个报错并不会影响打开skim，，，只是因为默认的是Preview（Mac自带），所以用skim打开的时候就会这样。这时候手动打开Skim即可。</p>
+<h2 id="关于配置tex编译器和中文支持"><a href="#关于配置tex编译器和中文支持" class="headerlink" title="关于配置tex编译器和中文支持"></a>关于配置tex编译器和中文支持</h2><h3 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h3><p>首先感谢<a target="_blank" rel="noopener" href="http://blog.csdn.net/alchemyy/article/details/50941973">博主</a>，只要在tex文件的开头添加这三行，即可支持中文：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%!TEX program = xelatex</span></span><br><span class="line"><span class="meta">%!TEX TS-program = xelatex</span></span><br><span class="line"><span class="meta">%!TEX encoding = UTF-8 Unicode</span></span><br></pre></td></tr></table></figure>
+
+<p>加上这三行之后，依然是： 保存 — &gt; <code>ctrl+b</code> — &gt;  自动生成pdf</p>
+<p>但是比较麻烦的是，每次写tex都要这样写这样的三段，适用于方法2失败的同志们。</p>
+<h3 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h3><p>感谢<a target="_blank" rel="noopener" href="http://www.readern.com/sublime-text-latex-chinese-under-mac.html">博主</a>。 虽然具体操作跟现在sublime的版本配置方法还是有点出入，但是大体是对的，步骤如下：</p>
+<ul>
+<li>打开终端，运行：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo tlmgr update --self</span><br><span class="line">sudo tlmgr install latexmk</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>sublime中，选择preference —&gt; package settings —&gt; latexTools—&gt; settings-Users</li>
+<li>自动在sublime中打开“LatexTools.sublime-settings”的文件，这就是一些LatexTools的配置</li>
+<li>会看到有很多设置模块，从开始依次是：general settings —&gt; preview settings —&gt; temporary file settings —&gt; platform settings —&gt; output directory settings —&gt; <strong>build engine settings</strong>  … 后面不写了，因为找到build engine settings就对了</li>
+<li>除了注释，会先看到：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;builder&quot;: &quot;traditional&quot;,</span><br></pre></td></tr></table></figure>
+
+<p>这个traditional是默认的，不用修改。</p>
+<p>再往下是”builder_path”: “”,”，不用修改</p>
+<p>再往下就是要修改的地方了！看到“program”和“command”，是后面加上去的，注意添加到如下的位置，不要弄错地方！</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&quot;builder_settings&quot; : &#123;</span><br><span class="line"></span><br><span class="line">		// General settings:</span><br><span class="line">		// See README or third-party documentation</span><br><span class="line"></span><br><span class="line">		// (built-ins): true shows the log of each command in the output panel</span><br><span class="line">		&quot;display_log&quot; : false,</span><br><span class="line">		&quot;program&quot; : &quot;xelatex&quot;, //加上去这一行</span><br><span class="line">		&quot;command&quot; : [&quot;latexmk&quot;, &quot;-cd&quot;, &quot;-e&quot;, &quot;$pdflatex = &#x27;xelatex -interaction=nonstopmode -synctex=1 %S %O&#x27;&quot;, &quot;-f&quot;, &quot;-pdf&quot;],  //再加上去这一行，不用换行</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		// Platform-specific settings:</span><br><span class="line">		&quot;osx&quot; : &#123;</span><br><span class="line">			// See README or third-party documentation</span><br><span class="line">			&#125;,</span><br><span class="line"></span><br><span class="line">		&quot;windows&quot; : &#123;</span><br><span class="line">			// See README or third-party documentation</span><br><span class="line">		&#125;,</span><br><span class="line"></span><br><span class="line">		&quot;linux&quot; : &#123;</span><br><span class="line">			// See README or third-party documentation</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后保存，重启sublime，done！之后编译就很正常了～不用再写方法1中的那三行了，很方便～</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpeg" alt="Arabela Tso 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpeg" alt="Arabela Tso 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/computer-latex/" rel="tag"># computer, latex</a>
+          </div>
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/03/16/murphi-introduction-7/" rel="prev" title="Murphi入门（七）—— 互斥协议解析">
+                  <i class="fa fa-angle-left"></i> Murphi入门（七）—— 互斥协议解析
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/03/20/murphi-introduction-6/" rel="next" title="Murphi入门（六）—— 用murphi实现GCD（3）">
+                  Murphi入门（六）—— 用murphi实现GCD（3） <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Arabela Tso</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/ArabelaTso" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"naaXkdnpYPUXOj8VlETpQkYr-gzGzoHsz","app_key":"N2cpd0QyqVvPeOafJtl4s0zH","server_url":"https://arabelatso.github.io/","security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+
+</body>
+</html>

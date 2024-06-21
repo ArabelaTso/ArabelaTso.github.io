@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"arabelatso.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该博文内容包括：  翻译Murphi Manual  并附上自己的解读和案例  关于Murphi 安装，请看 Murphi入门">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【置顶】Murphi手册">
+<meta property="og:url" content="https://arabelatso.github.io/2017/03/02/murphi-introduction-0/index.html">
+<meta property="og:site_name" content="Arabela&#39;s Blog">
+<meta property="og:description" content="该博文内容包括：  翻译Murphi Manual  并附上自己的解读和案例  关于Murphi 安装，请看 Murphi入门">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-03-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-06-21T12:30:20.444Z">
+<meta property="article:author" content="Arabela Tso">
+<meta property="article:tag" content="murphi">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://arabelatso.github.io/2017/03/02/murphi-introduction-0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://arabelatso.github.io/2017/03/02/murphi-introduction-0/","path":"2017/03/02/murphi-introduction-0/","title":"【置顶】Murphi手册"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【置顶】Murphi手册 | Arabela's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Arabela's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Murphi-%E6%89%8B%E5%86%8C"><span class="nav-number">1.</span> <span class="nav-text">Murphi 手册</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. 介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-Murphi%E7%9A%84%E7%BB%84%E6%88%90"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">1.1 Murphi的组成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-Murphi%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">1.2 Murphi的前世今生</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Murphi%E6%A6%82%E8%BF%B0"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. Murphi概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-Murphi%E6%8F%8F%E8%BF%B0%E7%9A%84%E7%BB%93%E6%9E%84"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">2.1 Murphi描述的结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-%E7%94%A8Murphi%E8%BF%9B%E8%A1%8C%E9%AA%8C%E8%AF%81%E7%9A%84%E5%9B%9B%E4%B8%AA%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">2.2 用Murphi进行验证的四个步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-Murphi%E6%89%A7%E8%A1%8C%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.0.2.3.</span> <span class="nav-text">2.3 Murphi执行模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-Murphi%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E9%80%89%E9%A1%B9"><span class="nav-number">1.0.2.4.</span> <span class="nav-text">2.4 Murphi编译器的选项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-%E7%89%B9%E6%AE%8A%E7%9B%AE%E7%9A%84%E6%A3%80%E9%AA%8C%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">1.0.2.5.</span> <span class="nav-text">2.5 特殊目的检验器的使用方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.0.3.</span> <span class="nav-text">3 基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-Backus-Naur-Form-BNF"><span class="nav-number">1.0.3.1.</span> <span class="nav-text">3.1 Backus-Naur Form (BNF)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-%E8%AF%8D%E6%B3%95%E6%83%AF%E4%BE%8B"><span class="nav-number">1.0.3.2.</span> <span class="nav-text">3.2 词法惯例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84"><span class="nav-number">1.0.3.3.</span> <span class="nav-text">3.3 程序结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E5%A3%B0%E6%98%8E"><span class="nav-number">1.0.3.4.</span> <span class="nav-text">4 声明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-%E5%B8%B8%E9%87%8F%E3%80%81%E7%B1%BB%E5%9E%8B%E3%80%81%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E"><span class="nav-number">1.0.3.5.</span> <span class="nav-text">4.1 常量、类型、变量声明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-%E5%AD%90%E7%A8%8B%E5%BA%8F%E5%92%8C%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E"><span class="nav-number">1.0.3.6.</span> <span class="nav-text">4.2 子程序和函数声明</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90%EF%BC%9A"><span class="nav-number">1.0.3.6.1.</span> <span class="nav-text">例子：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.0.4.</span> <span class="nav-text">5 表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E4%BB%A3"><span class="nav-number">1.0.4.1.</span> <span class="nav-text">指代</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%88%E4%B8%8Ec%E8%AF%AD%E8%A8%80%E5%87%A0%E4%B9%8E%E4%B8%80%E6%A0%B7%EF%BC%89%EF%BC%9A"><span class="nav-number">1.0.4.1.1.</span> <span class="nav-text">表达式（与c语言几乎一样）：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.0.4.2.</span> <span class="nav-text">运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#forall-%E5%92%8C-exists-%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-number">1.0.4.3.</span> <span class="nav-text">forall 和 exists 操作符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.0.5.</span> <span class="nav-text">6 条件语句</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#if"><span class="nav-number">1.0.5.0.1.</span> <span class="nav-text">if</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#while"><span class="nav-number">1.0.5.0.2.</span> <span class="nav-text">while</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#switch"><span class="nav-number">1.0.5.0.3.</span> <span class="nav-text">switch</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%AB%E5%90%8D"><span class="nav-number">1.0.5.0.4.</span> <span class="nav-text">别名</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8"><span class="nav-number">1.0.5.0.5.</span> <span class="nav-text">函数调用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B8%85%E9%99%A4"><span class="nav-number">1.0.5.0.6.</span> <span class="nav-text">清除</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8A%A5%E9%94%99"><span class="nav-number">1.0.5.0.7.</span> <span class="nav-text">报错</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BE%93%E5%87%BA"><span class="nav-number">1.0.5.0.8.</span> <span class="nav-text">输出</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E"><span class="nav-number">1.0.5.0.9.</span> <span class="nav-text">函数返回</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E8%A7%84%E5%88%99%E9%9B%86%EF%BC%8C%E5%88%9D%E5%A7%8B%E7%8A%B6%E6%80%81%EF%BC%8C%E4%B8%8D%E5%8F%98%E9%87%8F"><span class="nav-number">1.0.6.</span> <span class="nav-text">7 规则集，初始状态，不变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%84%E5%88%99"><span class="nav-number">1.0.6.1.</span> <span class="nav-text">规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E7%8A%B6%E6%80%81"><span class="nav-number">1.0.6.2.</span> <span class="nav-text">初始状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%8F%98%E9%87%8F%EF%BC%8F%E5%AE%89%E5%85%A8%E6%80%A7%E8%B4%A8"><span class="nav-number">1.0.6.3.</span> <span class="nav-text">不变量／安全性质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%84%E5%88%99%E9%9B%86"><span class="nav-number">1.0.6.4.</span> <span class="nav-text">规则集</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Arabela Tso</p>
+  <div class="site-description" itemprop="description">May all your optimal is global.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ArabelaTso" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ArabelaTso" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://arabelatso.github.io/2017/03/02/murphi-introduction-0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Arabela Tso">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Arabela's Blog">
+      <meta itemprop="description" content="May all your optimal is global.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【置顶】Murphi手册 | Arabela's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【置顶】Murphi手册
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-03-02 00:00:00" itemprop="dateCreated datePublished" datetime="2017-03-02T00:00:00+08:00">2017-03-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-06-21 20:30:20" itemprop="dateModified" datetime="2024-06-21T20:30:20+08:00">2024-06-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BD%A2%E5%BC%8F%E5%8C%96%E6%96%B9%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">形式化方法</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2017/03/02/murphi-introduction-0/" class="post-meta-item leancloud_visitors" data-flag-title="【置顶】Murphi手册" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>该博文内容包括：</p>
+<ul>
+<li><p>翻译Murphi Manual</p>
+</li>
+<li><p>并附上自己的解读和案例</p>
+</li>
+<li><p>关于Murphi 安装，请看 <a href="https://arabelatso.github.io/2017/02/19/Feb%2019%20Murphi%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Murphi入门</a></p>
+</li>
+</ul>
+<span id="more"></span>
+
+
+<h1 id="Murphi-手册"><a href="#Murphi-手册" class="headerlink" title="Murphi 手册"></a>Murphi 手册</h1><h3 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h3><h4 id="1-1-Murphi的组成"><a href="#1-1-Murphi的组成" class="headerlink" title="1.1 Murphi的组成"></a>1.1 Murphi的组成</h4><ul>
+<li><p>编译器：根据Murphi描述语言，生成特定目的的验证器，可以被用来检验系统的性质，比如说错误警告（error assertion），不变量和死锁。</p>
+</li>
+<li><p>描述语言：高层次的描述性语言，用来描述有限状态的、异步的、并发系统。之所以称之为高级，是因为它具有很多我们现在称之为高级编程语言（Pascal 或 C）的特性，比如用户自定义的数据类型，程序，和带参描述。</p>
+</li>
+</ul>
+<h4 id="1-2-Murphi的前世今生"><a href="#1-2-Murphi的前世今生" class="headerlink" title="1.2 Murphi的前世今生"></a>1.2 Murphi的前世今生</h4><ul>
+<li><p>以前Murphi叫“Trans”，因为它的描述由一系列迁移规则组成。但是因为重名的太多了，就改名叫Murphi。</p>
+</li>
+<li><p>Murphi的一条法则：bug永远都存在于未被测试过的案例中。</p>
+</li>
+<li><p>1990年夏，因为想要验证缓存一致协议，Ralph Melton, David L. Dill等人想出了两种方法：</p>
+<ul>
+<li>基于binary decision模式，用布尔公式来验证</li>
+<li>直接将协议写入c++，并用搜索程序来探索所有状态</li>
+</ul>
+<p>最终，他们决定开发一款更好的描述语言和一套验证系统，能够验证协议。</p>
+<p>于是，同年秋，Murphi（那时叫“Trans”）诞生了，但是还太复杂。经过改造和重新实现，次年夏天，该系统已经能够被应用于一些设计，并取得喜人成效。</p>
+<p>直到1992年夏，Murphi经过积累经验和实践打磨，新增了许多便利的特点，比如reasonal loops（有理循环），local variables（局部变量），recursive procedures（递归过程）。Ralph Melton又重写了一遍功能，将murphi变得更适合显式对象，使得实现变得更简洁、简单。</p>
+</li>
+</ul>
+<h3 id="2-Murphi概述"><a href="#2-Murphi概述" class="headerlink" title="2. Murphi概述"></a>2. Murphi概述</h3><h4 id="2-1-Murphi描述的结构"><a href="#2-1-Murphi描述的结构" class="headerlink" title="2.1 Murphi描述的结构"></a>2.1 Murphi描述的结构</h4><ul>
+<li>声明的常量，数据类型，全局变量，过程</li>
+<li>迁移规则集 —— 行为部分</li>
+<li>初始状态描述</li>
+<li>不变量集（invariant set）</li>
+</ul>
+<p>迁移规则集是由一系列“原子的”（不能被打断，一旦开始，必须执行到结束）规则组成，每一个规则都由两部分组成：</p>
+<ul>
+<li>条件：当满足条件时（布尔判断），就可以执行对应的行为</li>
+<li>行为：可以是改变变量的值等操作。该操作就导致状态的迁移。</li>
+</ul>
+<p>迁移规则的条件和行为都是由类Pascal语言写成的。每个行为可以很简单，也可以很复杂，可以包含循环和条件语句。但是无论多复杂，都一定保证它的原子性。</p>
+<h4 id="2-2-用Murphi进行验证的四个步骤"><a href="#2-2-用Murphi进行验证的四个步骤" class="headerlink" title="2.2 用Murphi进行验证的四个步骤"></a>2.2 用Murphi进行验证的四个步骤</h4><ul>
+<li>写好Murphi程序，后缀为.m</li>
+<li>运行Murphi 编译器，生成对应的c</li>
+<li>用c++编译器运行c</li>
+<li>运行生成的验证器或仿真模型</li>
+</ul>
+<h4 id="2-3-Murphi执行模型"><a href="#2-3-Murphi执行模型" class="headerlink" title="2.3 Murphi执行模型"></a>2.3 Murphi执行模型</h4><p>Murphi的状态，是指对所有全局变量进行赋值的描述。</p>
+<p>所以，Murphi在执行时的描述，就是通过无限循环以下两个步骤，来生成所有可达的状态：</p>
+<blockquote>
+<ul>
+<li>找到所有现在的状态所能满足的规则</li>
+<li>随机选择一个可满足的，并执行，产生一个新的状态。</li>
+</ul>
+</blockquote>
+<p>可以注意到，Murphi的描述是非必然性的，因为在第二步骤时，是随机选择的。而这个随机，又不是人为控制的。所以，为了保证Murphi一直正确，就必须保证在所有规则执行的情况下，都是正确的。但是一旦选择要执行某条规则，则下一步的状态就是确定的了。因为只能到达该规则所规定的行为所对应的状态。</p>
+<p>这个执行模型可以很好的描述异步系统，这些系统通过消息传送机制可以用Murphi建模，也就是读和写缓冲区变量或数组。</p>
+<p>某种意义上，Murphi尽管是随机选择迁移状态来执行，但是验证器会考虑到所有可能的状态，从而验证程序的正确性。通过深度搜索或广度搜索，将可达集存储于一张巨大的哈希表中，这样能够避免重复的工作，而又将可达状态记录下来。</p>
+<p>而随着所有状态都被验证器所发掘出来，也就意味着所有可能到达的情况都被检验到了。当检验出程序有错误时，Murphi会提醒“assert”或者“error”，检验器会停下来，然后打印出诊断书，显示出完整的、从初始状态到出错状态的所经过的状态序列。</p>
+<p>几种典型的程序错误如下：</p>
+<ul>
+<li>run-time错误<ul>
+<li>run-time错误可能有很多种，最典型的就是指派越界或数组越界。</li>
+</ul>
+</li>
+<li>不变量被违反的时候<ul>
+<li>不变量也就是安全性质，是在所有可达状态时都必须满足的状态或要求。当某个时刻，安全性质被违反了，说明程序设计上出现了问题</li>
+</ul>
+</li>
+<li>出现死锁<ul>
+<li>表现为，除了该状态本身之外，没有其他的后继状态</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-4-Murphi编译器的选项"><a href="#2-4-Murphi编译器的选项" class="headerlink" title="2.4 Murphi编译器的选项"></a>2.4 Murphi编译器的选项</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-h            help</span><br><span class="line">-l            print license</span><br><span class="line">-b            use bit-compacted states</span><br><span class="line">-c            use hash compaction.</span><br></pre></td></tr></table></figure>
+
+<p>通常情况下，Murphi默认所有的状态都用1 byte（8bits）记录，这样会使得每个bit不一定都用到。这比每一位都用到的情况下，会多占用2-4倍的内存。但是这样能使Murphi程序运行快将近25%。空间换时间吧。</p>
+<p>而”-c”压缩命令使用哈希压缩技术。压缩后大约占40bits，存储与一张哈希表中。详细见8.2</p>
+<h4 id="2-5-特殊目的检验器的使用方法"><a href="#2-5-特殊目的检验器的使用方法" class="headerlink" title="2.5 特殊目的检验器的使用方法"></a>2.5 特殊目的检验器的使用方法</h4><p>Murphi编译器根据Murphi描述，生成特定目标的检验器。以下是在命令行的一些选项：</p>
+<ol>
+<li>常规</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-h            help.</span><br><span class="line">-l            print license.</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>验证策略: (默认: -v)</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-s            simulate.</span><br><span class="line">-v or -vbfs   verify with breadth-first search. 广度优先搜索</span><br><span class="line">-vdfs         verify with depth-first search.深度优先搜索</span><br><span class="line">-ndl          do not check for deadlock. 不检验死锁</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>其他选项: (默认: -m8, -p3, -loop1000)</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-m&lt;n&gt;         amount of memory for closed hash table in Mb.</span><br><span class="line">-k&lt;n&gt;         same, but in Kb.</span><br><span class="line">-loop&lt;n&gt;      allow loops to be executed at most n times.</span><br><span class="line">-p            make simulation or verification verbose.</span><br><span class="line">-p&lt;n&gt;         report progress every 10^n events, n in 1..5.</span><br><span class="line">-pn           print no progress reports.</span><br><span class="line">-pr           print out rule information.打印规则信息</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>错误追踪处理: (默认: -tn)</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-tv           write a violating trace (with default -td).</span><br><span class="line">-td           write only state differences from the previous states.</span><br><span class="line">              (in simulation mode, write only state differences in</span><br><span class="line">               verbose mode.)</span><br><span class="line">-tf           write full states in trace.</span><br><span class="line">              (in simulation mode, write full states in verbose mode.)</span><br><span class="line">-ta           write all generated states at least once.</span><br><span class="line">-tn           write no trace (default).</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>规约技术: (default: -sym3 with -permlimit 10 and multiset</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">                          reduction)</span><br><span class="line">-nosym        no symmetry reduction (multiset reduction still effective)</span><br><span class="line">-nomultiset   no multiset reduction</span><br><span class="line">-sym&lt;n&gt;       reduction by symmetry</span><br><span class="line">-permlimit&lt;n&gt; max num of permutation checked in alg 3</span><br><span class="line">              (for canonicalization, set it to zero)</span><br><span class="line">              n | methods</span><br><span class="line">              -----------------------------------</span><br><span class="line">              1 | exhaustive canonicalize</span><br><span class="line">              2 | heuristic fast canonicalization</span><br><span class="line">                  (can be slower or faster than alg 3 canonicalization)</span><br><span class="line">                  (use a lot of auxiliary memory for large scalarsets)</span><br><span class="line">              3 | heuristic small mem canonicalization/normalization</span><br><span class="line">                  (depends on -permlimit)</span><br><span class="line">              4 | heuristic fast normalization (alg 3 with -permlimit 1)</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>哈希压缩: (默认: hash compaction with 40 bits  用40bit位进行压缩)</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-b&lt;n&gt;         number of bits to store.</span><br><span class="line">-d dir        write trace info into file dir/sci.trace.</span><br></pre></td></tr></table></figure>
+
+<p>命令选项“-s” 将生成一个仿真器，亦即随机选择规则执行。如果不选择，则默认生成的是验证器，将验证所有的规则。默认的遍历方式是广度优先搜索，如果想换成深度优先，则“-vdfs”</p>
+<p>可达集被存储于一张大的哈希表中。它的大小由选项“-m”和“-k”来决定。默认是8Mbytes。存储于文件”mu_prolog.inc” 中的常量”gPercentActiveStates” 可以用来调整深度或广度优先搜索的队列的性能。</p>
+<h3 id="3-基本概念"><a href="#3-基本概念" class="headerlink" title="3 基本概念"></a>3 基本概念</h3><h4 id="3-1-Backus-Naur-Form-BNF"><a href="#3-1-Backus-Naur-Form-BNF" class="headerlink" title="3.1 Backus-Naur Form (BNF)"></a>3.1 Backus-Naur Form (BNF)</h4><p>巴科斯范式，一种形式化符号来描述给定语言的语法，现用来定义编程语言的语法规则</p>
+<p>BNF的句法如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;&gt; denote nonterminals;   非终结符号</span><br><span class="line">[] denote optional sections;   可选部分</span><br><span class="line">&#123;&#125; denote repetition zero or more times.   重复0-n次</span><br><span class="line">a | b denotes either a or b.   a或者b</span><br><span class="line">() denote grouping.  组</span><br></pre></td></tr></table></figure>
+
+<p>当在语句中需要使用到这些符号时，需要在前面加上“\”加以区分</p>
+<h4 id="3-2-词法惯例"><a href="#3-2-词法惯例" class="headerlink" title="3.2 词法惯例"></a>3.2 词法惯例</h4><p>以下是Murphi中的保留字：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">alias           array           assert          begin           </span><br><span class="line">boolean         by              case            clear</span><br><span class="line">const           do              else            elsif</span><br><span class="line">end             endalias        endexists       endfor</span><br><span class="line">endforall       endfunction     endif           endprocedure</span><br><span class="line">endrecord       endrule         endruleset      endstartstate</span><br><span class="line">endswitch       endwhile        enum            error</span><br><span class="line">exists          false           for             forall</span><br><span class="line">function        if              in              interleaved</span><br><span class="line">invariant       of              procedure       process</span><br><span class="line">program         put             record          return</span><br><span class="line">rule            ruleset         startstate      switch</span><br><span class="line">then            to              traceuntil      true</span><br><span class="line">type            var             while</span><br></pre></td></tr></table></figure>
+
+<p>有些保留字现在还没有用到，但是以后可能会用于扩展，它们是：“in, interleaved, process, program, traceuntil.”</p>
+<p><strong>大小写敏感：</strong> 除了保留字（ ‘Begin’ 和‘BeGiN’ 一样），其他的都是大小写敏感的。</p>
+<p><strong>同义词：</strong> 保留字‘end’可以替换‘endrule’和‘endfor’</p>
+<p><strong>标识符：</strong>标识符是由字母，下划线，数字组成的序列，其中数字前面必须有字字母。标识符以下划线开头。下文用<ID>表示。</p>
+<p><strong>字符串：</strong>用双引号引起来的里面的字母序列。下文用<string>表示</p>
+<p><strong>整数常量：</strong>10进制。下文用<integer-constant>表示</p>
+<p><strong>注释：</strong>有两种注释方式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> -- comments1 </span><br><span class="line">／* comments2 *／</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-3-程序结构"><a href="#3-3-程序结构" class="headerlink" title="3.3 程序结构"></a>3.3 程序结构</h4><ul>
+<li>程序声明</li>
+<li>规则集（包含初始状态）</li>
+<li>不变量／安全性质</li>
+</ul>
+<p>Murphi程序隐式生成一个状态图。状态是指所有全局变量指派值的情况。初始状态在规则集中有声明。接下去的状态由迁移规则决定。</p>
+<h4 id="4-声明"><a href="#4-声明" class="headerlink" title="4 声明"></a>4 声明</h4><h4 id="4-1-常量、类型、变量声明"><a href="#4-1-常量、类型、变量声明" class="headerlink" title="4.1 常量、类型、变量声明"></a>4.1 常量、类型、变量声明</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;decl&gt; ::=	const &#123; &lt;constdecl&gt; ; &#125;</span><br><span class="line">	 |	type &#123; &lt;typedecl&gt; ; &#125;</span><br><span class="line">	 |	var &#123; &lt;vardecl&gt; ; &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>常量</strong></p>
+<p>常量一定要赋值，这样在编译时才会被执行。常量会被取整。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Const   </span><br><span class="line">   I: 2;</span><br><span class="line">   J: 31415 * I / 9;                 -- J will be 6981</span><br></pre></td></tr></table></figure>
+
+<p><strong>类型</strong></p>
+<p>特殊的枚举类型——布尔是预先定义的，由true或false组成。整数类型没有预先定义，因为如果无限制范围的整数会造成严重消耗内存。</p>
+<p>简单类型有：布尔、枚举、有限范围的整数。</p>
+<p>复合类型有：简单类型组成的数组、复合类型或简单类型的记录。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Type</span><br><span class="line">   val_t: 0..99;                     -- simple types.</span><br><span class="line">   ind_t: 1..i;</span><br><span class="line">   enum_t: enum &#123; x, y, z &#125;;</span><br><span class="line">   b: boolean;</span><br><span class="line"></span><br><span class="line">   r_t: record f:0..1; g: 0..2; end; -- Record.</span><br><span class="line">   rr_t: record r: r_t; s: r_t; end; -- Record of record.</span><br><span class="line"></span><br><span class="line">   a_t: array [ ind_t ] of 19..29;   -- 1-dimensional array.</span><br><span class="line">   aa_t: array [ ind_t ] of a_t;     -- 2-dimensional array.</span><br><span class="line"></span><br><span class="line">   ar_t: array [ 1..2 ] of r_t;      -- Array of record.</span><br><span class="line">   ra_t: record a1: a_t; foo: ind_t; end;     -- Record with array.</span><br><span class="line"></span><br><span class="line">   ae_t: array [ enum_t ] of enum_t; -- Array with enum index and range.</span><br><span class="line">   aae_t: array [ ind_t ] of ae_t;   -- 2-dim array, 2nd index is enum.</span><br><span class="line">   re_t: record f: enum_t; end;      -- Record of enum.</span><br></pre></td></tr></table></figure>
+
+<p><strong>变量</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Var</span><br><span class="line">   val : val_t;</span><br><span class="line">   arr : ae_t;</span><br><span class="line">   rec : record foo: ind_t; bar: boolean; end;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-2-子程序和函数声明"><a href="#4-2-子程序和函数声明" class="headerlink" title="4.2 子程序和函数声明"></a>4.2 子程序和函数声明</h4><p>子程序和函数必须声明在程序的最外层，即不包含于规则或执行体内部。</p>
+<ul>
+<li>函数，function，一定要有返回状态</li>
+<li>子程序，procedure</li>
+</ul>
+<p>参数列表表示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function add(var x,y: val_t):val_t;</span><br><span class="line">procedure add(var x,y: val_t);</span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ul>
+<li><p>不带参的子程序和函数，仍然需要括号括出来一个空的参数列表。</p>
+</li>
+<li><p>从上面的代码可以发现，function的后面还带有返回值的范围，而procedure则没有</p>
+</li>
+<li><p>val_t是一个自定义类型，可以定义成一定范围的整数，比如：</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">type</span><br><span class="line">	val_t:0..100;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>参数列表中，形参的值由实参传入。如果用var开头作为形参的声明，则说明其值可改，而如果不是var开头，则在子程序或函数中，实参的值不可更改。</li>
+<li>形参的声明和局部声明，将会覆盖其原本在外部的声明。比如，全局变量x本来声明为5. 在子程序内，将其赋值为3，则其在全局的值也变成3了。</li>
+</ul>
+<h5 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">procedure Swap(var i, j: val_t); -- 子程序，执行交换i，j的值</span><br><span class="line">var temp: val_t; </span><br><span class="line">begin</span><br><span class="line">  temp := i;</span><br><span class="line">  i := j;</span><br><span class="line">  j := temp; -- 直接交换</span><br><span class="line">end;</span><br><span class="line"></span><br><span class="line">                                        --函数，执行+2操作</span><br><span class="line">function plustwo(input: val_t): val_t;  -- 可以看到input没有声明成var，所以其值在函数中不可改变</span><br><span class="line">const two : 2; </span><br><span class="line">begin</span><br><span class="line">  return (input + two);  -- 需要返回值。 </span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-表达式"><a href="#5-表达式" class="headerlink" title="5 表达式"></a>5 表达式</h3><ul>
+<li>类型的相等，是通过自定义的类型名称来决定的</li>
+<li>整数表达式是否合法，与其语句正确与否不相关</li>
+<li>布尔类型与整数类型无法相比</li>
+<li>尚未赋值的变量无法取值，这种错误会当做run-time error，运行时错误</li>
+<li>数组越界也会在运行时检查到</li>
+</ul>
+<h4 id="指代"><a href="#指代" class="headerlink" title="指代"></a>指代</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;designator&gt; :=	&lt;ID&gt; &#123; . &lt;ID&gt; | \[ &lt;expr&gt; \] &#125;</span><br></pre></td></tr></table></figure>
+
+<p>比如，<code>student.name</code>这种类型表示域的，或选择数组中的某个元素，都是“.” 操作。</p>
+<h5 id="表达式（与c语言几乎一样）："><a href="#表达式（与c语言几乎一样）：" class="headerlink" title="表达式（与c语言几乎一样）："></a>表达式（与c语言几乎一样）：</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">| &lt;designator&gt;</span><br><span class="line">| &lt;integer-constant&gt;</span><br><span class="line">| &lt;ID&gt; \( &lt;actuals&gt; \)		-- a function call.</span><br><span class="line">| forall &lt;quantifier&gt; </span><br><span class="line">  do &lt;expr&gt; endforall		-- universal quantification.</span><br><span class="line">| exists &lt;quantifier&gt;</span><br><span class="line">  do &lt;expr&gt; endexists		-- existential quantification.</span><br><span class="line">| &lt;expr&gt; + &lt;expr&gt;</span><br><span class="line">| &lt;expr&gt; - &lt;expr&gt;</span><br><span class="line">| &lt;expr&gt; * &lt;expr&gt;		-- multiplication.</span><br><span class="line">| &lt;expr&gt; / &lt;expr&gt;		-- integer division.</span><br><span class="line">| &lt;expr&gt; % &lt;expr&gt;		-- remainder. “%”号两边必须是整数</span><br><span class="line">| ! &lt;expr&gt;			-- logical negation.</span><br><span class="line">| &lt;expr&gt; | &lt;expr&gt;		-- logical disjunction. 合取，即并集</span><br><span class="line">| &lt;expr&gt; &amp; &lt;expr&gt;		-- logical conjunction. 析取，即交集</span><br><span class="line">| &lt;expr&gt; -&gt; &lt;expr&gt;		-- logical implication. 逻辑蕴含</span><br><span class="line">| &lt;expr&gt; &lt; &lt;expr&gt;</span><br><span class="line">| &lt;expr&gt; &lt;= &lt;expr&gt;</span><br><span class="line">| &lt;expr&gt; &gt; &lt;expr&gt;</span><br><span class="line">| &lt;expr&gt; &gt;= &lt;expr&gt;</span><br><span class="line">| &lt;expr&gt; = &lt;expr&gt;</span><br><span class="line">| &lt;expr&gt; != &lt;expr&gt;</span><br><span class="line">| &lt;expr&gt; ? &lt;expr&gt; : &lt;expr&gt;	-- C-style conditional expression.</span><br></pre></td></tr></table></figure>
+
+<h4 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h4><p>运算优先级与c一样，不赘述</p>
+<h4 id="forall-和-exists-操作符"><a href="#forall-和-exists-操作符" class="headerlink" title="forall 和 exists 操作符"></a>forall 和 exists 操作符</h4><p>量化命题的时候会用到，类似于全称和存在命题。</p>
+<h3 id="6-条件语句"><a href="#6-条件语句" class="headerlink" title="6 条件语句"></a>6 条件语句</h3><p>注：原文写的是 statement，但是因为看下面的语句都是条件语句，所以直接翻译成条件语句了</p>
+<h5 id="if"><a href="#if" class="headerlink" title="if"></a>if</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if x &gt; 0 then</span><br><span class="line">	x := x-1;</span><br><span class="line">	else</span><br><span class="line">	x := 0;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+
+<h5 id="while"><a href="#while" class="headerlink" title="while"></a>while</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while x &gt; 0 do</span><br><span class="line">	x := x-1;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+
+<h5 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">switch x</span><br><span class="line">	case 1: x:= x-1;</span><br><span class="line">	else </span><br><span class="line">	x := 0;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+
+<p>注：无限循环是一个运行时错误，但是murphi有限制，默认最多循环1000次，这个值可以用户自定义。</p>
+<h5 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h5><p>注意看别名是用指针还是数值赋值的。通过以下例子就能理解：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-- i = 2 beforehand; arr[2] = 1. 一开始的时候，i = 2</span><br><span class="line">alias</span><br><span class="line">  foo : arr[i] 	-- foo gets identified with arr[2]</span><br><span class="line">  bar : arr[i] + 1	-- bar gets identified with 2.</span><br><span class="line">do</span><br><span class="line">  arr[i] := 3;	-- now, foo = 3, but bar = 2.</span><br><span class="line">  i := 1;		-- foo is still bound to a[2]. </span><br><span class="line">  foo := 4;		-- arr[2] is now 4. bar = 2.</span><br><span class="line">  bar := 2;		-- Illegal. 因为arr[1]没有赋值</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+<h5 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h5><p>常数形参可以由任意可比较的实参传递得到； 变量参数（以var开头的形参）只能被同类型的带值的实参传递； 类型序列作为参数的时候，只能由同种类型的、被赋值的类型序列传递得到。</p>
+<h5 id="清除"><a href="#清除" class="headerlink" title="清除"></a>清除</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clear x；</span><br></pre></td></tr></table></figure>
+
+<p>这个操作用来清除该类型的所有组成部分，将所有值降到最低。枚举类型则还原成初始赋值。布尔类型赋值成false。</p>
+<pre><code>**注意**：clear这个命令常常用来清除那些不感兴趣的变量。如果不这样的话，验证的时候就会产生很多不必要的状态。但是这个方法不要乱用。
+</code></pre>
+<h5 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h5><p>就像抛出异常一样。两种写法是等同的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">assert x &lt; 0 &quot;error!&quot;;</span><br><span class="line">if x &lt; 0 then error &quot;error!&quot; end;</span><br></pre></td></tr></table></figure>
+
+<h5 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">put &quot;\n&quot;;</span><br></pre></td></tr></table></figure>
+
+<p>可以输出字符串或表达式，且每一次经过该状态都会执行，所以常常在验证时会产生大量的输出（因为需要大量的重复）。所有一般用于调试，并生成文件。</p>
+<h5 id="函数返回"><a href="#函数返回" class="headerlink" title="函数返回"></a>函数返回</h5><p>函数必须有返回值，且返回值的类型必须等于规定的返回值类型。</p>
+<h3 id="7-规则集，初始状态，不变量"><a href="#7-规则集，初始状态，不变量" class="headerlink" title="7 规则集，初始状态，不变量"></a>7 规则集，初始状态，不变量</h3><h4 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h4><ul>
+<li>迁移规则集由很多条规则组成</li>
+<li>每一条规则都由条件和动作组成<ul>
+<li>如果没有规定条件，则代表该规则永远成立</li>
+</ul>
+</li>
+<li>每一个动作代表状态的一次迁移，所以叫做迁移规则</li>
+<li>状态即所有全局变量的一次全体赋值情况</li>
+</ul>
+<p>每一条规则内，可以再声明局部变量、常数和自定义类型，但都与全局变量无关，亦即，不是状态的一部分。</p>
+<p>如果一条规则，既没有条件，也没有行为，在句法上是可行的，但是因为parse对于这样的规则常常会进行忽略处理，所以就算该规则没有条件，也要写上begin开头的动作。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rule		   			rule</span><br><span class="line">  &lt;condition&gt;				  &lt;decls&gt;</span><br><span class="line">==&gt;					begin</span><br><span class="line">  &lt;decls&gt;		--&gt;		  if &lt;condition&gt;</span><br><span class="line">begin					    &lt;body&gt;</span><br><span class="line">  &lt;body&gt;				  end</span><br><span class="line">end					end</span><br></pre></td></tr></table></figure>
+
+<p>这两种写法都是可以的。一种看成先有条件，条件满足才能进入规则；另一种看成可以进入规则，然后再进行条件判断，如果不满足条件，则不执行，状态也没有改变。</p>
+<ul>
+<li>如果程序没有规则，则程序错误。因为Murphi的程序结构是需要保证的。</li>
+</ul>
+<h4 id="初始状态"><a href="#初始状态" class="headerlink" title="初始状态"></a>初始状态</h4><ul>
+<li>初始状态可以看成特殊的规则，它只会在程序执行的一开始执行，之后就不会再执行了。</li>
+<li>初始状态一定要对所有全局变量进行赋值，否则会被检测器抓住的～</li>
+<li>如果没有初始状态，则程序错误。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">startstate</span><br><span class="line">	y := 5;</span><br><span class="line">	x := 10;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+
+<h4 id="不变量／安全性质"><a href="#不变量／安全性质" class="headerlink" title="不变量／安全性质"></a>不变量／安全性质</h4><p>在形式化方法中，很重要的组成部分。它的范围&gt;&#x3D;可达集的范围。指的是，在所有可达状态下，都能保证的性质；一旦不满足该性质，则程序终止。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">invariant &quot;safe&quot;</span><br><span class="line">	x = 1;</span><br></pre></td></tr></table></figure>
+
+<p>这个写法，实际上等同于一个特殊的规则：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rule</span><br><span class="line">	x != 1;</span><br><span class="line">==&gt;</span><br><span class="line">	error &quot;Invariant violated！&quot;;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>很多程序员认为，自己写assert 或error，比用invariant更方便。但实际上，使用invariant对于编译器而言更高效。</li>
+</ul>
+<h4 id="规则集"><a href="#规则集" class="headerlink" title="规则集"></a>规则集</h4><p>规则集是迁移规则的集合，可以看作是一个语法小秘方，能够对所有的量化对象（有取值范围的、可以取好多值的那种类型，类似于一个迭代器）创建一个拷贝。比如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Type player_t : 0..1;</span><br><span class="line">Var Players : Array[ player_t ] of Record;</span><br><span class="line">			       hasball, gotball: boolean;</span><br><span class="line">			     End;</span><br><span class="line"></span><br><span class="line">Ruleset p : player_t Do</span><br><span class="line">  Alias ping: Players[p];</span><br><span class="line">        pong: Players[ 1 - p ] Do</span><br><span class="line"></span><br><span class="line">      Rule &quot;Get ball&quot;</span><br><span class="line">        ping.gotball</span><br><span class="line">      ==&gt;</span><br><span class="line">      Begin</span><br><span class="line">        ping.hasball := true;</span><br><span class="line">        ping.gotball := false;</span><br><span class="line">      End;</span><br><span class="line">  End;</span><br><span class="line">End;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，player_t有两个取值，看成一个quantifier量词。规则集对于p，也就有两种取值，0和1。 如果不用规则集，则对于p的不同取值，需要把这些规则写两遍，但是有了规则集，对于这些不同的取值，只需要写一遍规则，即可对所有的取值情况的状态都进行遍历，并得出状态的并集，生成可达集。而这就需要别名alias来实现。因为别名经过一次指派之后，都只会遵从原来指派的那个值或表达式，不会改变，这就保证了在哈希表中，对于同样的状态，即使是不同的p的取值，也能表示相同的状态。（这个概念很复杂，是自己的理解之后写的，还有待以后加深理解之后来验证）</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpeg" alt="Arabela Tso 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpeg" alt="Arabela Tso 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/murphi/" rel="tag"># murphi</a>
+          </div>
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/02/28/murphi-introduction-3/" rel="prev" title="Murphi入门（三）—— 可达集范例讲解（2）">
+                  <i class="fa fa-angle-left"></i> Murphi入门（三）—— 可达集范例讲解（2）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/03/08/murphi-introduction-5/" rel="next" title="Murphi入门（五）—— 用murphi实现GCD（2）">
+                  Murphi入门（五）—— 用murphi实现GCD（2） <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Arabela Tso</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/ArabelaTso" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"naaXkdnpYPUXOj8VlETpQkYr-gzGzoHsz","app_key":"N2cpd0QyqVvPeOafJtl4s0zH","server_url":"https://arabelatso.github.io/","security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+
+</body>
+</html>

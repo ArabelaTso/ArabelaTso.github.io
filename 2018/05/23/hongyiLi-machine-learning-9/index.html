@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"arabelatso.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文为台大李宏毅的机器学习入门课程笔记。 第 9 章： DNN小贴士 重点：  介绍Keras forward pass backward pass">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lec-9 Tips for training DNN - Machine learning (台大李宏毅)">
+<meta property="og:url" content="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-9/index.html">
+<meta property="og:site_name" content="Arabela&#39;s Blog">
+<meta property="og:description" content="本文为台大李宏毅的机器学习入门课程笔记。 第 9 章： DNN小贴士 重点：  介绍Keras forward pass backward pass">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-9/steps.png">
+<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-9/overfit.png">
+<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-9/dropout.png">
+<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-9/vanish.png">
+<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-9/relu.png">
+<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-9/re1.png">
+<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-9/re2.png">
+<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-9/re3.png">
+<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-9/maxout.png">
+<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-9/maxout2.png">
+<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-9/train.png">
+<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-9/ada.png">
+<meta property="article:published_time" content="2018-05-22T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-06-21T12:30:20.445Z">
+<meta property="article:author" content="Arabela Tso">
+<meta property="article:tag" content="machine learning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-9/steps.png">
+
+
+<link rel="canonical" href="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-9/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-9/","path":"2018/05/23/hongyiLi-machine-learning-9/","title":"Lec-9 Tips for training DNN - Machine learning (台大李宏毅)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Lec-9 Tips for training DNN - Machine learning (台大李宏毅) | Arabela's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Arabela's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E7%97%87%E4%B8%8B%E8%8D%AF"><span class="nav-number">2.</span> <span class="nav-text">对症下药</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">激活函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#sigmoid"><span class="nav-number">3.0.1.</span> <span class="nav-text">sigmoid</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ReLU"><span class="nav-number">3.0.2.</span> <span class="nav-text">ReLU</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReLU%E5%8F%98%E4%BD%93"><span class="nav-number">4.</span> <span class="nav-text">ReLU变体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maxout"><span class="nav-number">5.</span> <span class="nav-text">Maxout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-set-learning-rate"><span class="nav-number">6.</span> <span class="nav-text">How to set learning rate?</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Arabela Tso</p>
+  <div class="site-description" itemprop="description">May all your optimal is global.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ArabelaTso" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ArabelaTso" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Arabela Tso">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Arabela's Blog">
+      <meta itemprop="description" content="May all your optimal is global.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Lec-9 Tips for training DNN - Machine learning (台大李宏毅) | Arabela's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Lec-9 Tips for training DNN - Machine learning (台大李宏毅)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-05-23 00:00:00" itemprop="dateCreated datePublished" datetime="2018-05-23T00:00:00+08:00">2018-05-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-06-21 20:30:20" itemprop="dateModified" datetime="2024-06-21T20:30:20+08:00">2024-06-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/machine-learning/" itemprop="url" rel="index"><span itemprop="name">machine learning</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2018/05/23/hongyiLi-machine-learning-9/" class="post-meta-item leancloud_visitors" data-flag-title="Lec-9 Tips for training DNN - Machine learning (台大李宏毅)" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>本文为台大李宏毅的机器学习入门课程笔记。</p>
+<p>第 9 章： DNN小贴士</p>
+<p>重点：</p>
+<ul>
+<li>介绍Keras</li>
+<li>forward pass</li>
+<li>backward pass</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p>在做完三步走的时候，还要再试试看这个学习出来的NN在training set上的正确率。</p>
+<p>这一步很unique，因为在一般的机器学习算法，比如KNN， decision tree等问题，就完全不用再回头试试看training set，因为这些算法一般可以看作是为training set 量身打造了一个模型，所以在这个training set上naturally地会有最好的效果。然而在NN上，其实不容易overfitting，很可能在training set上就已经效果不好了，那这个时候就要再改模型。</p>
+<p>只有当在training set上效果很好，但testing set上效果不好的时候，才是overfitting。</p>
+<p><img src="/hongyiLi-machine-learning-9/steps.png" alt="steps"></p>
+<p><img src="/hongyiLi-machine-learning-9/overfit.png" alt="overfit"></p>
+<p>很多事情就不要都怪overfitting。有的时候只是结构不好、或者只是找到了local minimize。所以在这个时候先看看训练出来的模型在training set上的效果怎么样，然后再来决定是不是overfitting，要不要调整结构。</p>
+<h2 id="对症下药"><a href="#对症下药" class="headerlink" title="对症下药"></a>对症下药</h2><p>很多人常常一看到performance不好就觉得是overfitting，或者不知道该调整什么。</p>
+<p>看看下面的图，进行对症下药吧～</p>
+<p>当训练出一个模型之后，先用这个模型到training set上。如果在training data上的效果就不好的话，说明这个模型不太适合，就可以考虑调整结构（增加&#x2F;减少层&#x2F;神经元个数等）、更换激活函数等；如果在training set上效果很好，那么再去试试看testing set。如果在testing set上效果也很好，那就恭喜你，完成训练～如果效果不好，那么久考虑用dropout、regularization等方法来排除overfittign所带来的问题。</p>
+<p><img src="/hongyiLi-machine-learning-9/dropout.png" alt="dropout"></p>
+<h2 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h2><h4 id="sigmoid"><a href="#sigmoid" class="headerlink" title="sigmoid"></a>sigmoid</h4><p>当把layer叠得很深的时候，就会发现sigmoid作为激活函数的时候，会有梯度消失</p>
+<p><img src="/hongyiLi-machine-learning-9/vanish.png" alt="vanish"></p>
+<p>因为sigmoid function会把正负无穷大的数映射到0-1之间。所以随着sigmoid的次数增加，就会把最前面的影响减小到几乎为零，就几乎变成随机改变了。</p>
+<h4 id="ReLU"><a href="#ReLU" class="headerlink" title="ReLU"></a>ReLU</h4><p>为了解决这个问题，大家开始用ReLU作为激活函数</p>
+<p><img src="/hongyiLi-machine-learning-9/relu.png" alt="relu"></p>
+<p>原因：</p>
+<ul>
+<li>好计算，当然了咯一目了然 :p</li>
+<li>有生物上的原因，不明</li>
+<li>它其实等于无限次叠加sigmoid的结果</li>
+<li>它能解决梯度消失这个问题</li>
+</ul>
+<p>为什么它能解决梯度消失这个问题呢？</p>
+<p><img src="/hongyiLi-machine-learning-9/re1.png" alt="re1"></p>
+<p><img src="/hongyiLi-machine-learning-9/re2.png" alt="re2"></p>
+<p>因为它没有映射的问题，所以就不会把梯度减少乃至消失。而且，当输入为负的时候，输出直接映射成0，所以可以看作直接没有这个neuron，NN的结构被简化成像是linear了。</p>
+<h2 id="ReLU变体"><a href="#ReLU变体" class="headerlink" title="ReLU变体"></a>ReLU变体</h2><p><img src="/hongyiLi-machine-learning-9/re3.png" alt="re2"></p>
+<h2 id="Maxout"><a href="#Maxout" class="headerlink" title="Maxout"></a>Maxout</h2><p><img src="/hongyiLi-machine-learning-9/maxout.png" alt="maxout"></p>
+<p> <img src="/hongyiLi-machine-learning-9/maxout2.png" alt="maxout2"></p>
+<p>所以可以看到，maxout 可以塑造出不同的activate function</p>
+<p>但是怎么train它呢？ <img src="/hongyiLi-machine-learning-9/train.png" alt="train"></p>
+<p>我们可以看到，因为maxout只选取最大的那个来train，所以那些颜色浅的地方不就train不到了嘛？</p>
+<p>但是实际上，这个问题并不存在。因为每当输入不同的时候，每个z都有可能会被train到，所以不用担心～</p>
+<h2 id="How-to-set-learning-rate"><a href="#How-to-set-learning-rate" class="headerlink" title="How to set learning rate?"></a>How to set learning rate?</h2><p>回顾之前，我们能够动态地调整learning rate，就是Adagrad，每个参数有自己独特的一个learning rate</p>
+<p><img src="/hongyiLi-machine-learning-9/ada.png" alt="ada"></p>
+<p>当梯度较大时，证明这里比较陡峭，所以给它比较小的learning rate；当梯度小时，就证明这里比较平坦，所以就给它大一点的learning rate。这么做的目的，是希望各个参数的进步程度都一样，所以如果那个参数的进步比较快，那我们就让它走慢一点；如果那个参数走很慢，那我们就让它一个步伐迈大一点。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpeg" alt="Arabela Tso 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpeg" alt="Arabela Tso 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/machine-learning/" rel="tag"># machine learning</a>
+          </div>
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/05/22/hongyiLi-machine-learning-5/" rel="prev" title="Lec-5  Regression(case study) - Machine learning (台大李宏毅)">
+                  <i class="fa fa-angle-left"></i> Lec-5  Regression(case study) - Machine learning (台大李宏毅)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/05/23/hongyiLi-machine-learning-8/" rel="next" title="Lec-8 "hello world" from deep learning - Machine learning (台大李宏毅)">
+                  Lec-8 "hello world" from deep learning - Machine learning (台大李宏毅) <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Arabela Tso</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/ArabelaTso" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"naaXkdnpYPUXOj8VlETpQkYr-gzGzoHsz","app_key":"N2cpd0QyqVvPeOafJtl4s0zH","server_url":"https://arabelatso.github.io/","security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+
+</body>
+</html>

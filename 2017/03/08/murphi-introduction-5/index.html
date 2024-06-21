@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"arabelatso.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="该博文是对之前GCD编程的改进：  未改进的GCD地址 改进思路 通过GCD，对Murphi编程的思想做个总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Murphi入门（五）—— 用murphi实现GCD（2）">
+<meta property="og:url" content="https://arabelatso.github.io/2017/03/08/murphi-introduction-5/index.html">
+<meta property="og:site_name" content="Arabela&#39;s Blog">
+<meta property="og:description" content="该博文是对之前GCD编程的改进：  未改进的GCD地址 改进思路 通过GCD，对Murphi编程的思想做个总结">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-03-07T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-06-21T12:30:20.562Z">
+<meta property="article:author" content="Arabela Tso">
+<meta property="article:tag" content="murphi">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://arabelatso.github.io/2017/03/08/murphi-introduction-5/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://arabelatso.github.io/2017/03/08/murphi-introduction-5/","path":"2017/03/08/murphi-introduction-5/","title":"Murphi入门（五）—— 用murphi实现GCD（2）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Murphi入门（五）—— 用murphi实现GCD（2） | Arabela's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Arabela's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mar-7-GCD-%E6%94%B9%E8%BF%9B"><span class="nav-number">1.</span> <span class="nav-text">Mar 7 GCD 改进</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87"><span class="nav-number">1.0.1.</span> <span class="nav-text">目标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%9D%E6%83%B3"><span class="nav-number">1.0.2.</span> <span class="nav-text">思想</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%84%E5%88%99"><span class="nav-number">1.0.3.</span> <span class="nav-text">规则</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%80%9D%E8%B7%AF%EF%BC%9A"><span class="nav-number">1.0.3.1.</span> <span class="nav-text">函数思路：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E6%80%9D%E8%B7%AF"><span class="nav-number">1.0.3.2.</span> <span class="nav-text">状态思路</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E7%8A%B6%E6%80%81"><span class="nav-number">1.0.4.</span> <span class="nav-text">初始状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%8F%98%E9%87%8F"><span class="nav-number">1.0.5.</span> <span class="nav-text">不变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0-%EF%BC%8F-%E7%A8%8B%E5%BA%8F"><span class="nav-number">1.0.6.</span> <span class="nav-text">函数 ／ 程序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#gcd"><span class="nav-number">1.0.6.1.</span> <span class="nav-text">gcd</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#commonDivdors"><span class="nav-number">1.0.6.2.</span> <span class="nav-text">commonDivdors</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#compare"><span class="nav-number">1.0.6.3.</span> <span class="nav-text">compare</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C"><span class="nav-number">1.0.7.</span> <span class="nav-text">运行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.0.8.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Arabela Tso</p>
+  <div class="site-description" itemprop="description">May all your optimal is global.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ArabelaTso" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ArabelaTso" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://arabelatso.github.io/2017/03/08/murphi-introduction-5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Arabela Tso">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Arabela's Blog">
+      <meta itemprop="description" content="May all your optimal is global.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Murphi入门（五）—— 用murphi实现GCD（2） | Arabela's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Murphi入门（五）—— 用murphi实现GCD（2）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-03-08 00:00:00" itemprop="dateCreated datePublished" datetime="2017-03-08T00:00:00+08:00">2017-03-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-06-21 20:30:20" itemprop="dateModified" datetime="2024-06-21T20:30:20+08:00">2024-06-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BD%A2%E5%BC%8F%E5%8C%96%E6%96%B9%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">形式化方法</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2017/03/08/murphi-introduction-5/" class="post-meta-item leancloud_visitors" data-flag-title="Murphi入门（五）—— 用murphi实现GCD（2）" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>该博文是对之前GCD编程的改进：</p>
+<ul>
+<li>未改进的GCD<a href="https://arabelatso.github.io/2017/02/28/Feb%2028%20GCD%20Murphi%20Programming/">地址</a></li>
+<li>改进思路</li>
+<li>通过GCD，对Murphi编程的思想做个总结</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="Mar-7-GCD-改进"><a href="#Mar-7-GCD-改进" class="headerlink" title="Mar 7 GCD 改进"></a>Mar 7 GCD 改进</h2><h4 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h4><blockquote>
+<ul>
+<li>改进GCD</li>
+<li>通过GCD求解，更深刻理解Murphi与其他编程原理的不同</li>
+</ul>
+</blockquote>
+<h4 id="思想"><a href="#思想" class="headerlink" title="思想"></a>思想</h4><p>Murphi最主要的思想是，按照所有全局变量的赋值来考虑，亦即考虑状态。因为是通过遍历所有状态来达到检验的目的。思考路线如下：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>x</th>
+<th>y</th>
+<th>arr_i</th>
+<th>arr_temp</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>inital</td>
+<td>12</td>
+<td>21</td>
+<td>[1,3]</td>
+<td>[1,3]</td>
+</tr>
+<tr>
+<td>swap</td>
+<td>21</td>
+<td>12</td>
+<td>[1,3]</td>
+<td>[1,3]</td>
+</tr>
+<tr>
+<td>gcd</td>
+<td>21</td>
+<td>12</td>
+<td>[1,3]</td>
+<td>[1,3]</td>
+</tr>
+</tbody></table>
+<p>这是根据rule的迁移而写的状态。可以看到，全局变量有x, y, arr_i, arr_temp。其中，x，y为需要求gcd的两个数。两个数组是用来保证invariant性质的。</p>
+<h4 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h4><p>有两种思路：</p>
+<h5 id="函数思路："><a href="#函数思路：" class="headerlink" title="函数思路："></a>函数思路：</h5><p>​	用常规编程的思想来思考这个程序，比如python语言中，用递归：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">gcd</span>(<span class="params">x,y</span>):</span><br><span class="line">    <span class="keyword">return</span> y <span class="keyword">if</span> y == <span class="number">0</span> <span class="keyword">else</span> gcd(y, x%y)</span><br></pre></td></tr></table></figure>
+
+<p>​	或者不用递归，用交换和循环：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">gcd</span>(<span class="params">x,y</span>):</span><br><span class="line">	<span class="keyword">if</span> x &lt; y :</span><br><span class="line">        temp = y</span><br><span class="line">        y = x</span><br><span class="line">        x = temp</span><br><span class="line">    r = x % y</span><br><span class="line">    <span class="keyword">while</span> r != <span class="number">0</span>:</span><br><span class="line">        x = y</span><br><span class="line">        y = r</span><br><span class="line">        r = x % y</span><br><span class="line">    <span class="keyword">return</span> y</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
+
+<p>可以看到，有两个步骤：</p>
+<ul>
+<li>交换</li>
+<li>循环直到找到最大公因数</li>
+</ul>
+<p>所以将这个思路用于murphi规则：</p>
+<ul>
+<li>rule “swap”<ul>
+<li>条件：x &lt; y</li>
+<li>动作：交换x，y的值</li>
+</ul>
+</li>
+<li>rule “gcd”<ul>
+<li>条件：x &gt; y </li>
+<li>动作：循环，求出gcd</li>
+</ul>
+</li>
+</ul>
+<p>代码实现：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">rule <span class="string">&quot;swap&quot;</span> -- 交换</span><br><span class="line">	x &lt; y ==&gt; </span><br><span class="line">    var temp: <span class="type">var_t</span>;</span><br><span class="line">    begin</span><br><span class="line">      	temp := y;</span><br><span class="line">		y := x;</span><br><span class="line">		x := temp;</span><br><span class="line">	end;</span><br><span class="line"></span><br><span class="line">rule <span class="string">&quot;gcd&quot;</span>  -- 求解</span><br><span class="line"> 	x &gt;= y ==&gt; </span><br><span class="line">	begin</span><br><span class="line">  		gcd(x,y);</span><br><span class="line">	end;</span><br></pre></td></tr></table></figure>
+
+<h5 id="状态思路"><a href="#状态思路" class="headerlink" title="状态思路"></a>状态思路</h5><p>因为全局变量有x和y，x与y的关系有3种可能：</p>
+<ul>
+<li>x &gt; y</li>
+<li>x &#x3D; y</li>
+<li>x &lt; y</li>
+</ul>
+<p>其中，第二种直接可以输出x。第一种可以执行gcd(x,y)，第二种执行gcd(y,x)。将这个思路直接写成规则即可。</p>
+<ul>
+<li>rule “gcd_x”<ul>
+<li>条件：x &gt; y</li>
+<li>动作：gcd(x,y)</li>
+</ul>
+</li>
+<li>rule “equal”<ul>
+<li>条件：x &#x3D; y</li>
+<li>动作：put(x)</li>
+</ul>
+</li>
+<li>rule “gcd_y”<ul>
+<li>条件：x &lt; y</li>
+<li>动作：gcd(y,x)</li>
+</ul>
+</li>
+</ul>
+<p>代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">rule <span class="string">&quot;gcd_x&quot;</span></span><br><span class="line">	x &gt; y ==&gt;</span><br><span class="line">	begin</span><br><span class="line">		gcd(x,y);</span><br><span class="line">	end;</span><br><span class="line"></span><br><span class="line">rule <span class="string">&quot;gcd_y&quot;</span></span><br><span class="line">	x &lt; y ==&gt;</span><br><span class="line">	begin</span><br><span class="line">  		gcd(y,x);</span><br><span class="line">	end;</span><br><span class="line"></span><br><span class="line">rule <span class="string">&quot;equal&quot;</span></span><br><span class="line">  	x = y ==&gt;</span><br><span class="line">  	begin</span><br><span class="line">  		put(y);</span><br><span class="line">	end;</span><br></pre></td></tr></table></figure>
+
+<h4 id="初始状态"><a href="#初始状态" class="headerlink" title="初始状态"></a>初始状态</h4><table>
+<thead>
+<tr>
+<th></th>
+<th>x</th>
+<th>y</th>
+<th>arr_i</th>
+<th>arr_temp</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>initial</td>
+<td>21</td>
+<td>12</td>
+<td>[1,3]</td>
+<td>[1,3]</td>
+</tr>
+</tbody></table>
+<p>代码实现：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">startstate</span><br><span class="line">	x := <span class="number">21</span>;</span><br><span class="line">	y := <span class="number">12</span>;</span><br><span class="line">	commonDivdors(x,y,arr_temp); </span><br><span class="line">	commonDivdors(<span class="number">21</span>, <span class="number">12</span>, arr_i);</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="不变量"><a href="#不变量" class="headerlink" title="不变量"></a>不变量</h4><p>在过程中，x，y的值都设置为不变，则此时不变的为x，y的公因数集合。每次状态的迁移都必须满足该表达式。即保证x，y不会改变。</p>
+<p>代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">invariant <span class="string">&quot;commonDivdors&quot;</span></span><br><span class="line">	compare(arr_i, arr_temp);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="函数-／-程序"><a href="#函数-／-程序" class="headerlink" title="函数 ／ 程序"></a>函数 ／ 程序</h4><p>函数与程序的区别为，函数有返回值，程序没有返回值。</p>
+<p>在传递参数时，传入的参数都为引用传递，var开头表示在函数体内部可改变其值，没有var开头则为不可改变值。</p>
+<p>如果要传入数值，则只能用不带var开头的形参。</p>
+<p>要实现的函数／程序有：</p>
+<ul>
+<li>gcd — 求解最大公因数</li>
+<li>commonDivdors —求解x，y的公因数集合</li>
+<li>compare —用来比较两个数组是否相同</li>
+</ul>
+<p>具体实现如下：</p>
+<h5 id="gcd"><a href="#gcd" class="headerlink" title="gcd"></a>gcd</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Procedure <span class="title function_">gcd</span><span class="params">(x,y: <span class="type">val_t</span>)</span>;</span><br><span class="line">var</span><br><span class="line">	r : <span class="type">val_t</span>; </span><br><span class="line">	a : <span class="type">val_t</span>; -- x，y的值不能改变，所以用局部变量来接受值</span><br><span class="line">	b : <span class="type">val_t</span>;</span><br><span class="line">begin</span><br><span class="line">	a := x;</span><br><span class="line">	b := y;</span><br><span class="line">	r := a % b;</span><br><span class="line">	<span class="keyword">while</span> r!= <span class="number">0</span> <span class="keyword">do</span></span><br><span class="line">		a := b;</span><br><span class="line">		b := r;</span><br><span class="line">		r := a % b;</span><br><span class="line">	end;</span><br><span class="line">	put(b); -- 输出最大公因数</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="commonDivdors"><a href="#commonDivdors" class="headerlink" title="commonDivdors"></a>commonDivdors</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">Procedure <span class="title function_">commonDivdors</span><span class="params">(x, y: <span class="type">val_t</span>; Var arr_temp:<span class="type">arr_t</span>)</span>;</span><br><span class="line">Var </span><br><span class="line">	temp : <span class="type">val_t</span>;</span><br><span class="line">	i : <span class="type">val_t</span>;</span><br><span class="line">	a: <span class="type">val_t</span>;</span><br><span class="line">	b: <span class="type">val_t</span>;</span><br><span class="line">begin</span><br><span class="line">	a := x;</span><br><span class="line">	b := y;</span><br><span class="line">	i := <span class="number">0</span>;</span><br><span class="line">	temp := b;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> a &lt; b then  -- 交换，使得被除数一直大于等于除数</span><br><span class="line">		b := a;</span><br><span class="line">		a := temp;</span><br><span class="line">	end;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> temp &gt;= <span class="number">1</span> <span class="keyword">do</span>  -- 将除数一直减<span class="number">1</span>，除被除数和除数，如果可以整除，则放入数组</span><br><span class="line">		<span class="keyword">if</span> (a % temp = <span class="number">0</span>) &amp; (b % temp = <span class="number">0</span>) then</span><br><span class="line">			arr_temp[i] := temp;</span><br><span class="line">			i := i + <span class="number">1</span>;</span><br><span class="line">		end;</span><br><span class="line">		temp := temp <span class="number">-1</span>;</span><br><span class="line">	end;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> i &lt; <span class="number">30</span> <span class="keyword">do</span>   -- 把没有赋值的数组中其他的元素置<span class="number">0</span></span><br><span class="line">		arr_temp[i] := <span class="number">0</span>; </span><br><span class="line">		i := i + <span class="number">1</span>;</span><br><span class="line">	arr_temp[i] := <span class="number">0</span>; -- 最后一位循环不到，直接赋值</span><br><span class="line">	end;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="compare"><a href="#compare" class="headerlink" title="compare"></a>compare</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Function <span class="title function_">compare</span><span class="params">(arr_temp, arr_i: <span class="type">arr_t</span>)</span>: Boolean; -- 有返回值</span><br><span class="line">begin</span><br><span class="line">	<span class="keyword">for</span> i: <span class="type">val_t</span> Do</span><br><span class="line">      -- 逐位比较，如果碰到不同，则返回<span class="literal">false</span>。</span><br><span class="line">      -- 因为commonDivdors函数按照从大到小依次减<span class="number">1</span>的顺序计算，所以只要不同，则集合不同</span><br><span class="line">		<span class="keyword">if</span> arr_temp[i] != arr_i[i] then  -- 没有var开头，不可改变其值</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span>;  </span><br><span class="line">		end;</span><br><span class="line">	end;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><p>*死锁：某状态只有该状态本身之外，没有其他后继状态。</p>
+<p>因为程序设置x，y的值不变（或互换之后，公因数集仍然没有改变），所以对于规则而言，一开始满足的，后来也会满足。所有造成死锁。但没关系，因为状态枚举完成，且会输出最大公因数。（用例： x &#x3D; 24, y &#x3D; 18, 规则用第二种方案）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./gcd_2.o -pr</span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">b:6</span><br><span class="line"></span><br><span class="line">==========================================================================</span><br><span class="line"></span><br><span class="line">Result:</span><br><span class="line"></span><br><span class="line">	Deadlocked state found.</span><br><span class="line"></span><br><span class="line">State Space Explored:</span><br><span class="line"></span><br><span class="line">	1 states, 1 rules fired in 0.10s.</span><br><span class="line"></span><br><span class="line">Rules Information:</span><br><span class="line"></span><br><span class="line">	Fired 0 times	- Rule &quot;equal&quot;</span><br><span class="line">	Fired 0 times	- Rule &quot;gcd_y&quot;</span><br><span class="line">	Fired 1 times	- Rule &quot;gcd_x&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
+<li>murphi编程与一般编程的思维方式不太一样，要考虑全局状态的迁移。</li>
+<li>可以写出状态的表格，更有利于分析和理解。</li>
+<li>当分析了所有状态之后，规则集也就方便写出了。</li>
+<li>不变量的选择很重要。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpeg" alt="Arabela Tso 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpeg" alt="Arabela Tso 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/murphi/" rel="tag"># murphi</a>
+          </div>
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/03/02/murphi-introduction-0/" rel="prev" title="【置顶】Murphi手册">
+                  <i class="fa fa-angle-left"></i> 【置顶】Murphi手册
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/03/11/os1/" rel="next" title="Linux内核组成及功能">
+                  Linux内核组成及功能 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Arabela Tso</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/ArabelaTso" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+
+  <script src="/js/third-party/addtoany.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"naaXkdnpYPUXOj8VlETpQkYr-gzGzoHsz","app_key":"N2cpd0QyqVvPeOafJtl4s0zH","server_url":"https://arabelatso.github.io/","security":true}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+
+</body>
+</html>
