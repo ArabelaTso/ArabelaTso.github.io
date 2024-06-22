@@ -26,16 +26,16 @@
 <meta property="og:site_name" content="Arabela&#39;s Blog">
 <meta property="og:description" content="该博文只是粗略地整理Linux内核的一些基本知识结构：  可以直接跳到思维导图看知识结构  有附上相关博文，可以供大家参考  如果有错误，欢迎指出～">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://arabelatso.github.io/os1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD.png">
-<meta property="og:image" content="https://arabelatso.github.io/os1/%E6%BA%90%E4%BB%A3%E7%A0%81.png">
-<meta property="og:image" content="https://arabelatso.github.io/os1/%E5%8A%9F%E8%83%BD%E5%AF%B9%E5%BA%94%E6%A8%A1%E5%9D%97.png">
-<meta property="og:image" content="https://arabelatso.github.io/os1/%E5%8F%AF%E5%8A%A0%E8%BD%BD%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97LKm.png">
-<meta property="og:image" content="https://arabelatso.github.io/os1/cpu.png">
+<meta property="og:image" content="https://arabelatso.github.io/2017/03/11/os1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD.png">
+<meta property="og:image" content="https://arabelatso.github.io/2017/03/11/os1/%E6%BA%90%E4%BB%A3%E7%A0%81.png">
+<meta property="og:image" content="https://arabelatso.github.io/2017/03/11/os1/%E5%8A%9F%E8%83%BD%E5%AF%B9%E5%BA%94%E6%A8%A1%E5%9D%97.png">
+<meta property="og:image" content="https://arabelatso.github.io/2017/03/11/os1/%E5%8F%AF%E5%8A%A0%E8%BD%BD%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97LKm.png">
+<meta property="og:image" content="https://arabelatso.github.io/2017/03/11/os1/cpu.png">
 <meta property="article:published_time" content="2017-03-10T16:00:00.000Z">
 <meta property="article:modified_time" content="2024-06-22T06:03:05.857Z">
 <meta property="article:author" content="Arabela Tso">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://arabelatso.github.io/os1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD.png">
+<meta name="twitter:image" content="https://arabelatso.github.io/2017/03/11/os1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD.png">
 
 
 <link rel="canonical" href="https://arabelatso.github.io/2017/03/11/os1/">
@@ -130,18 +130,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-count">55</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -297,13 +297,16 @@
 <p><strong>5、进程通信</strong> (Interprocess Communication)</p>
 <p>进程通信提供了进程之间的各种通信机制。分为三种主要的通信方式，适用于进程间；及一种内核态与用户态间的通信方式。</p>
 <p>五种功能如下图：</p>
-<p><img src="/os1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD.png" alt="操作系统功能"></p>
+<img src="/2017/03/11/os1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8A%9F%E8%83%BD.png" class="" title="操作系统功能">
+
 <h5 id="参考文档："><a href="#参考文档：" class="headerlink" title="参考文档："></a>参考文档：</h5><p><a target="_blank" rel="noopener" href="http://blog.csdn.net/u010889616/article/details/47868887">http://blog.csdn.net/u010889616/article/details/47868887</a></p>
 <p><a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/2b33e765aaea998fcd220e33.html">https://wenku.baidu.com/view/2b33e765aaea998fcd220e33.html</a></p>
 <h4 id="代码模块"><a href="#代码模块" class="headerlink" title="代码模块"></a>代码模块</h4><p>源代码的主要模块可分为：</p>
-<p><img src="/os1/%E6%BA%90%E4%BB%A3%E7%A0%81.png" alt="源代码"></p>
+<img src="/2017/03/11/os1/%E6%BA%90%E4%BB%A3%E7%A0%81.png" class="" title="源代码">
+
 <p>因此，对应内核功能，除了头文件、通用内核库、平台兼容性（所有功能模块都会调用）外，内核功能与代码模块的对应为：</p>
-<p><img src="/os1/%E5%8A%9F%E8%83%BD%E5%AF%B9%E5%BA%94%E6%A8%A1%E5%9D%97.png" alt="功能对应模块"></p>
+<img src="/2017/03/11/os1/%E5%8A%9F%E8%83%BD%E5%AF%B9%E5%BA%94%E6%A8%A1%E5%9D%97.png" class="" title="功能对应模块">
+
 <p>参考文档：</p>
 <p><a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/a3a009fb941ea76e58fa0459.html">https://wenku.baidu.com/view/a3a009fb941ea76e58fa0459.html</a></p>
 <p><a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/10043eaef524ccbff1218421.html">https://wenku.baidu.com/view/10043eaef524ccbff1218421.html</a></p>
@@ -311,7 +314,10 @@
 <p><a target="_blank" rel="noopener" href="http://blog.chinaunix.net/uid-22330495-id-164941.html">http://blog.chinaunix.net/uid-22330495-id-164941.html</a></p>
 <h2 id="LKM工作机制"><a href="#LKM工作机制" class="headerlink" title="LKM工作机制"></a>LKM工作机制</h2><p>LKM是Linux内核为了扩展其功能所使用的可加载内核模块。它无须重新实现整个内核，而只需要动态加载，类似于局部渲染。因此，常被用作特殊设备的驱动程序。</p>
 <p>具体机制如下图：</p>
-<p><img src="/os1/%E5%8F%AF%E5%8A%A0%E8%BD%BD%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97LKm.png" alt="可加载内核模块LKm"></p>
+<img src="/2017/03/11/os1/%E5%8F%AF%E5%8A%A0%E8%BD%BD%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97LKm.png" class="" title="可加载内核模块LKm">
+
+
+
 <p>参考文档 ：</p>
 <p><a target="_blank" rel="noopener" href="https://www.ibm.com/developerworks/cn/linux/l-lkm/">https://www.ibm.com/developerworks/cn/linux/l-lkm/</a></p>
 <p><a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/10043eaef524ccbff1218421.html">https://wenku.baidu.com/view/10043eaef524ccbff1218421.html</a> </p>
@@ -323,7 +329,8 @@
 <li>进程上下文本来就与用户态密切相关，它出于内核态的最底层，最接近民众，所以它通信的方式也比较亲民。可以用一般的进程的通信方式进行通信。</li>
 </ul>
 <p>具体方式如下图：</p>
-<p><img src="/os1/cpu.png" alt="cpu"></p>
+<img src="/2017/03/11/os1/cpu.png" class="" title="cpu">
+
 <p>参考文档：</p>
 <p><a target="_blank" rel="noopener" href="https://www.ibm.com/developerworks/cn/linux/l-netlink/">https://www.ibm.com/developerworks/cn/linux/l-netlink/</a></p>
 <p><a target="_blank" rel="noopener" href="http://blog.csdn.net/wuruixn/article/details/24960935">http://blog.csdn.net/wuruixn/article/details/24960935</a> </p>
@@ -459,7 +466,7 @@
   <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"naaXkdnpYPUXOj8VlETpQkYr-gzGzoHsz","app_key":"N2cpd0QyqVvPeOafJtl4s0zH","security":false}</script>
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"naaXkdnpYPUXOj8VlETpQkYr-gzGzoHsz","app_key":"N2cpd0QyqVvPeOafJtl4s0zH","security":true}</script>
   <script src="/js/third-party/statistics/lean-analytics.js"></script>
 
 

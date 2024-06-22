@@ -26,22 +26,22 @@
 <meta property="og:site_name" content="Arabela&#39;s Blog">
 <meta property="og:description" content="本文为台大李宏毅的机器学习入门课程笔记。 第七章：反向传播 重点：  链式法则 forward pass backward pass">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-7/chain.png">
-<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-7/chain1.png">
-<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-7/forback.png">
-<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-7/back2.png">
-<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-7/back3.png">
-<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-7/back4.png">
-<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-7/another.png">
-<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-7/case1.png">
-<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-7/case2.png">
-<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-7/case2.png">
-<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-7/summary.png">
+<meta property="og:image" content="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-7/chain.png">
+<meta property="og:image" content="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-7/chain1.png">
+<meta property="og:image" content="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-7/forback.png">
+<meta property="og:image" content="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-7/back2.png">
+<meta property="og:image" content="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-7/back3.png">
+<meta property="og:image" content="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-7/back4.png">
+<meta property="og:image" content="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-7/another.png">
+<meta property="og:image" content="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-7/case1.png">
+<meta property="og:image" content="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-7/case2.png">
+<meta property="og:image" content="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-7/case2.png">
+<meta property="og:image" content="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-7/summary.png">
 <meta property="article:published_time" content="2018-05-22T16:00:00.000Z">
 <meta property="article:modified_time" content="2024-06-22T05:58:49.309Z">
 <meta property="article:author" content="Arabela Tso">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-7/chain.png">
+<meta name="twitter:image" content="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-7/chain.png">
 
 
 <link rel="canonical" href="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-7/">
@@ -136,18 +136,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-count">55</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -257,23 +257,36 @@
 <blockquote>
 <p>Back-propagation 其实就是针对NN的gradient descent，只是如果直接把gradient descent 用在NN上就会没有效率，因为可能有几百万个参数要优化，那就会卡死。所以就用链式法则来进行优化，也就是这个backpropagation。</p>
 </blockquote>
-<h2 id="Chain-rule-链式法则"><a href="#Chain-rule-链式法则" class="headerlink" title="Chain rule 链式法则"></a>Chain rule 链式法则</h2><p><img src="/hongyiLi-machine-learning-7/chain.png" alt="chain"></p>
+<h2 id="Chain-rule-链式法则"><a href="#Chain-rule-链式法则" class="headerlink" title="Chain rule 链式法则"></a>Chain rule 链式法则</h2><img src="/2018/05/23/hongyiLi-machine-learning-7/chain.png" class="" title="chain">
+
+
+
 <p>如果对w计算偏导，就可以只计算对某一个参数的loss 来计算</p>
 <p>其中，$C^n$ 看作一个衡量$y^n$与$\hat y^n$之间距离的函数，越小越好</p>
-<p><img src="/hongyiLi-machine-learning-7/chain1.png" alt="chain1"></p>
+<img src="/2018/05/23/hongyiLi-machine-learning-7/chain1.png" class="" title="chain1">
+
+
+
 <p>接下来我们只看红框里面的内容 </p>
-<p><img src="/hongyiLi-machine-learning-7/forback.png" alt="forback"></p>
+<img src="/2018/05/23/hongyiLi-machine-learning-7/forback.png" class="" title="forback">
+
+
+
 <p>可以看到，$\frac {\partial  C}{\partial w}$ 可以被链式法则拆解成 $\frac {\partial  z}{\partial w}$ 和$\frac {\partial  C}{\partial z}$</p>
 <p>其中，前者被称为forward pass, 后者被称为backward pass。</p>
 <h2 id="Forward-pass-前向传播"><a href="#Forward-pass-前向传播" class="headerlink" title="Forward pass 前向传播"></a>Forward pass 前向传播</h2><p>可以很容易地发现，w1对z的偏导就是x1， w2对z的偏导就是x2。也就是说，偏导只取决于输入。举个例子：</p>
-<p><img src="/hongyiLi-machine-learning-7/back2.png" alt="back2"></p>
+<img src="/2018/05/23/hongyiLi-machine-learning-7/back2.png" class="" title="back2">
+
 <p>这个步骤就叫做forward pass，它很容易就能得出来</p>
-<h2 id="Backward-pass-后向传播"><a href="#Backward-pass-后向传播" class="headerlink" title="Backward pass 后向传播"></a>Backward pass 后向传播</h2><p><img src="/hongyiLi-machine-learning-7/back3.png" alt="back3"></p>
+<h2 id="Backward-pass-后向传播"><a href="#Backward-pass-后向传播" class="headerlink" title="Backward pass 后向传播"></a>Backward pass 后向传播</h2><img src="/2018/05/23/hongyiLi-machine-learning-7/back3.png" class="" title="back3">
+
 <p>尽管我们知道a对z’ 的偏导和a对z‘’的偏导都能算出来（就是它们对应的权重），但我们不知道z’对C和z’’对C的偏导（因为我们不知道z’、z’’对C的关系，因为之后还有经过很多操作）。</p>
 <p>但是我们假设我们知道了，就直接把它们带入运算。</p>
-<p><img src="/hongyiLi-machine-learning-7/back4.png" alt="back4"></p>
+<img src="/2018/05/23/hongyiLi-machine-learning-7/back4.png" class="" title="back4">
+
 <p>让我们反着来看这件事：</p>
-<p><img src="/hongyiLi-machine-learning-7/another.png" alt="another"></p>
+<img src="/2018/05/23/hongyiLi-machine-learning-7/another.png" class="" title="another">
+
 <p>其中，z在forward pass中就已经决定好了，所以它是一个常数。</p>
 <p>那么现在就是要算出刚刚假设是已知的那两个数就可以了，那么怎么算呢？</p>
 <p>有两种情况：</p>
@@ -282,13 +295,20 @@
 <li>这一层的输出不是输出层</li>
 </ul>
 <h4 id="case-1-是output"><a href="#case-1-是output" class="headerlink" title="case 1 是output"></a>case 1 是output</h4><p>那么就可以直接得出来</p>
-<p><img src="/hongyiLi-machine-learning-7/case1.png" alt="case1"></p>
+<img src="/2018/05/23/hongyiLi-machine-learning-7/case1.png" class="" title="case1">
+
+
+
 <h4 id="case-2-不是output-layer"><a href="#case-2-不是output-layer" class="headerlink" title="case 2 不是output layer"></a>case 2 不是output layer</h4><p>这种情况就需要recursive地计算，一直到reach output layer为止</p>
-<p><img src="/hongyiLi-machine-learning-7/case2.png" alt="case1"></p>
+<img src="/2018/05/23/hongyiLi-machine-learning-7/case2.png" class="" title="case1">
+
 <p>但是这样的话就没有效率。我们可以直接反向运算，即直接先从output layer进行计算，这样就不需要recursion了。也就相当于建立了一个反向的NN，这个反向的NN的输入是原先的输出，输出是原先的输入。</p>
-<p><img src="/hongyiLi-machine-learning-7/case2.png" alt="case2"></p>
+<img src="/2018/05/23/hongyiLi-machine-learning-7/case2.png" class="" title="case2">
+
+
+
 <h2 id="总结backpropagation的过程"><a href="#总结backpropagation的过程" class="headerlink" title="总结backpropagation的过程"></a>总结backpropagation的过程</h2><p>总结来说，其实整个折腾这么两趟，是因为想知道每一个weight对最后的loss函数的偏微分。而这个偏微分根据链式法则来计算的话，中间的每一项偏微分都需要推导来计算。</p>
-<p><img src="/hongyiLi-machine-learning-7/summary.png" alt="summary"></p>
+<img src="/2018/05/23/hongyiLi-machine-learning-7/summary.png" class="" title="summary">
 
     </div>
 
@@ -325,13 +345,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2018/05/23/hongyiLi-machine-learning-8/" rel="prev" title="Lec-8 "hello world" from deep learning - Machine learning (台大李宏毅)">
-                  <i class="fa fa-angle-left"></i> Lec-8 "hello world" from deep learning - Machine learning (台大李宏毅)
+                <a href="/2018/05/23/hongyiLi-machine-learning-9/" rel="prev" title="Lec-9 Tips for training DNN - Machine learning (台大李宏毅)">
+                  <i class="fa fa-angle-left"></i> Lec-9 Tips for training DNN - Machine learning (台大李宏毅)
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2018/06/14/Z3%20API%20in%20Python/" rel="next" title="【置顶】Z3 API IN PYTHON 中文文档 （官方文档翻译）">
-                  【置顶】Z3 API IN PYTHON 中文文档 （官方文档翻译） <i class="fa fa-angle-right"></i>
+                <a href="/2018/05/23/hongyiLi-machine-learning-8/" rel="next" title="Lec-8 "hello world" from deep learning - Machine learning (台大李宏毅)">
+                  Lec-8 "hello world" from deep learning - Machine learning (台大李宏毅) <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -418,7 +438,7 @@
   <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"naaXkdnpYPUXOj8VlETpQkYr-gzGzoHsz","app_key":"N2cpd0QyqVvPeOafJtl4s0zH","security":false}</script>
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"naaXkdnpYPUXOj8VlETpQkYr-gzGzoHsz","app_key":"N2cpd0QyqVvPeOafJtl4s0zH","security":true}</script>
   <script src="/js/third-party/statistics/lean-analytics.js"></script>
 
 

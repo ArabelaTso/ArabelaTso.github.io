@@ -26,20 +26,20 @@
 <meta property="og:site_name" content="Arabela&#39;s Blog">
 <meta property="og:description" content="该博文详细介绍在Mac上安装Hadoop  原理  hadoop安装  hadoop配置  hadoop实例运行">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://arabelatso.github.io/mac-hadoop/hstart.jpeg">
-<meta property="og:image" content="https://arabelatso.github.io/mac-hadoop/file_system_counters.jpeg">
-<meta property="og:image" content="https://arabelatso.github.io/mac-hadoop/map_reduce_framework.jpeg">
-<meta property="og:image" content="https://arabelatso.github.io/mac-hadoop/overview.jpeg">
-<meta property="og:image" content="https://arabelatso.github.io/mac-hadoop/utility.jpeg">
-<meta property="og:image" content="https://arabelatso.github.io/mac-hadoop/browse.jpeg">
-<meta property="og:image" content="https://arabelatso.github.io/mac-hadoop/output.jpeg">
-<meta property="og:image" content="https://arabelatso.github.io/mac-hadoop/download.jpeg">
-<meta property="og:image" content="https://arabelatso.github.io/mac-hadoop/result.jpeg">
+<meta property="og:image" content="https://arabelatso.github.io/2017/04/08/mac-hadoop/hstart.jpeg">
+<meta property="og:image" content="https://arabelatso.github.io/2017/04/08/mac-hadoop/file_system_counters.jpeg">
+<meta property="og:image" content="https://arabelatso.github.io/2017/04/08/mac-hadoop/map_reduce_framework.jpeg">
+<meta property="og:image" content="https://arabelatso.github.io/2017/04/08/mac-hadoop/overview.jpeg">
+<meta property="og:image" content="https://arabelatso.github.io/2017/04/08/mac-hadoop/utility.jpeg">
+<meta property="og:image" content="https://arabelatso.github.io/2017/04/08/mac-hadoop/browse.jpeg">
+<meta property="og:image" content="https://arabelatso.github.io/2017/04/08/mac-hadoop/output.jpeg">
+<meta property="og:image" content="https://arabelatso.github.io/2017/04/08/mac-hadoop/download.jpeg">
+<meta property="og:image" content="https://arabelatso.github.io/2017/04/08/mac-hadoop/result.jpeg">
 <meta property="article:published_time" content="2017-04-08T05:01:54.000Z">
-<meta property="article:modified_time" content="2024-06-22T06:00:20.606Z">
+<meta property="article:modified_time" content="2024-06-22T08:16:33.776Z">
 <meta property="article:author" content="Arabela Tso">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://arabelatso.github.io/mac-hadoop/hstart.jpeg">
+<meta name="twitter:image" content="https://arabelatso.github.io/2017/04/08/mac-hadoop/hstart.jpeg">
 
 
 <link rel="canonical" href="https://arabelatso.github.io/2017/04/08/mac-hadoop/">
@@ -134,18 +134,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-count">55</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -213,7 +213,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-06-22 14:00:20" itemprop="dateModified" datetime="2024-06-22T14:00:20+08:00">2024-06-22</time>
+      <time title="修改时间：2024-06-22 16:16:33" itemprop="dateModified" datetime="2024-06-22T16:16:33+08:00">2024-06-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -370,7 +370,8 @@
 <h1 id="运行Hadoop实例"><a href="#运行Hadoop实例" class="headerlink" title="运行Hadoop实例"></a>运行Hadoop实例</h1><p>因为刚刚配置过了环境变量，所以现在开启hadoop直接输入：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hstart</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="/mac-hadoop/hstart.jpeg" alt="hstart"></p>
+<img src="/2017/04/08/mac-hadoop/hstart.jpeg" class="" title="hstart">
+
 <p>现在hadoop 已开启</p>
 <h2 id="准备mapreduce"><a href="#准备mapreduce" class="headerlink" title="准备mapreduce"></a>准备mapreduce</h2><ul>
 <li>下载一个jar</li>
@@ -397,20 +398,32 @@
 <p>第三个参数是选择输入的文件，也就是需要执行wordcount的文件。这里的路径要写的是刚刚上传到hdfs的路径。</p>
 <p>第四个也就是最后一个参数，是输出的文件放在哪里。要注意，这里需要指定一个文件夹名</p>
 <h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h2><p>部分结果如图：</p>
-<h3 id="系统计数"><a href="#系统计数" class="headerlink" title="系统计数"></a>系统计数</h3><p><img src="/mac-hadoop/file_system_counters.jpeg" alt="file_system_counters"></p>
-<h3 id="分布式系统框架"><a href="#分布式系统框架" class="headerlink" title="分布式系统框架"></a>分布式系统框架</h3><p><img src="/mac-hadoop/map_reduce_framework.jpeg" alt="map_reduce_framework"></p>
+<h3 id="系统计数"><a href="#系统计数" class="headerlink" title="系统计数"></a>系统计数</h3><img src="/2017/04/08/mac-hadoop/file_system_counters.jpeg" class="" title="file_system_counters">
+
+<h3 id="分布式系统框架"><a href="#分布式系统框架" class="headerlink" title="分布式系统框架"></a>分布式系统框架</h3><img src="/2017/04/08/mac-hadoop/map_reduce_framework.jpeg" class="" title="map_reduce_framework">
+
 <h3 id="查看输出文件"><a href="#查看输出文件" class="headerlink" title="查看输出文件"></a>查看输出文件</h3><p>打开端口local: 50070</p>
-<p><img src="/mac-hadoop/overview.jpeg" alt="overview"></p>
+<img src="/2017/04/08/mac-hadoop/overview.jpeg" class="" title="overview">
+
 <p>选择utilities-browse the file system</p>
-<p><img src="/mac-hadoop/utility.jpeg" alt="utility"></p>
-<p><img src="/mac-hadoop/browse.jpeg" alt="browse"></p>
+<img src="/2017/04/08/mac-hadoop/utility.jpeg" class="" title="utility">
+
+<img src="/2017/04/08/mac-hadoop/browse.jpeg" class="" title="browse">
+
 <p>点击usr，之后依次找到刚刚输出结果的文件夹</p>
-<p><img src="/mac-hadoop/output.jpeg" alt="output"></p>
+<img src="/2017/04/08/mac-hadoop/output.jpeg" class="" title="output">
+
 <p>其中，part-r-000000就是输出的结果</p>
-<p><img src="/mac-hadoop/download.jpeg" alt="download"></p>
+<img src="/2017/04/08/mac-hadoop/download.jpeg" class="" title="download">
+
 <p>点击下载，保存到本地。</p>
 <p>部分结果截图：</p>
-<p><img src="/mac-hadoop/result.jpeg" alt="result"></p>
+<img src="/2017/04/08/mac-hadoop/result.jpeg" class="" title="result">
+
+
+
+
+
 <p>至此，hadoop安装、配置、运行成功。</p>
 <p>参考链接：</p>
 <p><a target="_blank" rel="noopener" href="https://amodernstory.com/2014/09/23/installing-hadoop-on-mac-osx-yosemite/">https://amodernstory.com/2014/09/23/installing-hadoop-on-mac-osx-yosemite/</a></p>
@@ -545,7 +558,7 @@
   <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"naaXkdnpYPUXOj8VlETpQkYr-gzGzoHsz","app_key":"N2cpd0QyqVvPeOafJtl4s0zH","security":false}</script>
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"naaXkdnpYPUXOj8VlETpQkYr-gzGzoHsz","app_key":"N2cpd0QyqVvPeOafJtl4s0zH","security":true}</script>
   <script src="/js/third-party/statistics/lean-analytics.js"></script>
 
 

@@ -26,23 +26,23 @@
 <meta property="og:site_name" content="Arabela&#39;s Blog">
 <meta property="og:description" content="本文为台大李宏毅的机器学习入门课程笔记。 第 9 章： DNN小贴士 重点：  介绍Keras forward pass backward pass">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-9/steps.png">
-<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-9/overfit.png">
-<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-9/dropout.png">
-<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-9/vanish.png">
-<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-9/relu.png">
-<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-9/re1.png">
-<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-9/re2.png">
-<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-9/re3.png">
-<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-9/maxout.png">
-<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-9/maxout2.png">
-<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-9/train.png">
-<meta property="og:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-9/ada.png">
+<meta property="og:image" content="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-9/steps.png">
+<meta property="og:image" content="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-9/overfit.png">
+<meta property="og:image" content="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-9/dropout.png">
+<meta property="og:image" content="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-9/vanish.png">
+<meta property="og:image" content="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-9/relu.png">
+<meta property="og:image" content="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-9/re1.png">
+<meta property="og:image" content="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-9/re2.png">
+<meta property="og:image" content="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-9/re3.png">
+<meta property="og:image" content="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-9/maxout.png">
+<meta property="og:image" content="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-9/maxout2.png">
+<meta property="og:image" content="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-9/train.png">
+<meta property="og:image" content="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-9/ada.png">
 <meta property="article:published_time" content="2018-05-22T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-06-22T05:59:07.775Z">
+<meta property="article:modified_time" content="2024-06-22T08:14:17.570Z">
 <meta property="article:author" content="Arabela Tso">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://arabelatso.github.io/hongyiLi-machine-learning-9/steps.png">
+<meta name="twitter:image" content="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-9/steps.png">
 
 
 <link rel="canonical" href="https://arabelatso.github.io/2018/05/23/hongyiLi-machine-learning-9/">
@@ -137,18 +137,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-count">55</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -216,7 +216,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-06-22 13:59:07" itemprop="dateModified" datetime="2024-06-22T13:59:07+08:00">2024-06-22</time>
+      <time title="修改时间：2024-06-22 16:14:17" itemprop="dateModified" datetime="2024-06-22T16:14:17+08:00">2024-06-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -258,18 +258,25 @@
 <h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p>在做完三步走的时候，还要再试试看这个学习出来的NN在training set上的正确率。</p>
 <p>这一步很unique，因为在一般的机器学习算法，比如KNN， decision tree等问题，就完全不用再回头试试看training set，因为这些算法一般可以看作是为training set 量身打造了一个模型，所以在这个training set上naturally地会有最好的效果。然而在NN上，其实不容易overfitting，很可能在training set上就已经效果不好了，那这个时候就要再改模型。</p>
 <p>只有当在training set上效果很好，但testing set上效果不好的时候，才是overfitting。</p>
-<p><img src="/hongyiLi-machine-learning-9/steps.png" alt="steps"></p>
-<p><img src="/hongyiLi-machine-learning-9/overfit.png" alt="overfit"></p>
+<img src="/2018/05/23/hongyiLi-machine-learning-9/steps.png" class="" title="steps">
+
+<img src="/2018/05/23/hongyiLi-machine-learning-9/overfit.png" class="" title="overfit">
+
 <p>很多事情就不要都怪overfitting。有的时候只是结构不好、或者只是找到了local minimize。所以在这个时候先看看训练出来的模型在training set上的效果怎么样，然后再来决定是不是overfitting，要不要调整结构。</p>
 <h2 id="对症下药"><a href="#对症下药" class="headerlink" title="对症下药"></a>对症下药</h2><p>很多人常常一看到performance不好就觉得是overfitting，或者不知道该调整什么。</p>
 <p>看看下面的图，进行对症下药吧～</p>
 <p>当训练出一个模型之后，先用这个模型到training set上。如果在training data上的效果就不好的话，说明这个模型不太适合，就可以考虑调整结构（增加&#x2F;减少层&#x2F;神经元个数等）、更换激活函数等；如果在training set上效果很好，那么再去试试看testing set。如果在testing set上效果也很好，那就恭喜你，完成训练～如果效果不好，那么久考虑用dropout、regularization等方法来排除overfittign所带来的问题。</p>
-<p><img src="/hongyiLi-machine-learning-9/dropout.png" alt="dropout"></p>
+<img src="/2018/05/23/hongyiLi-machine-learning-9/dropout.png" class="" title="dropout">
+
+
+
 <h2 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h2><h4 id="sigmoid"><a href="#sigmoid" class="headerlink" title="sigmoid"></a>sigmoid</h4><p>当把layer叠得很深的时候，就会发现sigmoid作为激活函数的时候，会有梯度消失</p>
-<p><img src="/hongyiLi-machine-learning-9/vanish.png" alt="vanish"></p>
+<img src="/2018/05/23/hongyiLi-machine-learning-9/vanish.png" class="" title="vanish">
+
 <p>因为sigmoid function会把正负无穷大的数映射到0-1之间。所以随着sigmoid的次数增加，就会把最前面的影响减小到几乎为零，就几乎变成随机改变了。</p>
 <h4 id="ReLU"><a href="#ReLU" class="headerlink" title="ReLU"></a>ReLU</h4><p>为了解决这个问题，大家开始用ReLU作为激活函数</p>
-<p><img src="/hongyiLi-machine-learning-9/relu.png" alt="relu"></p>
+<img src="/2018/05/23/hongyiLi-machine-learning-9/relu.png" class="" title="relu">
+
 <p>原因：</p>
 <ul>
 <li>好计算，当然了咯一目了然 :p</li>
@@ -278,18 +285,24 @@
 <li>它能解决梯度消失这个问题</li>
 </ul>
 <p>为什么它能解决梯度消失这个问题呢？</p>
-<p><img src="/hongyiLi-machine-learning-9/re1.png" alt="re1"></p>
-<p><img src="/hongyiLi-machine-learning-9/re2.png" alt="re2"></p>
+<img src="/2018/05/23/hongyiLi-machine-learning-9/re1.png" class="" title="re1">
+
+<img src="/2018/05/23/hongyiLi-machine-learning-9/re2.png" class="" title="re2">
+
 <p>因为它没有映射的问题，所以就不会把梯度减少乃至消失。而且，当输入为负的时候，输出直接映射成0，所以可以看作直接没有这个neuron，NN的结构被简化成像是linear了。</p>
-<h2 id="ReLU变体"><a href="#ReLU变体" class="headerlink" title="ReLU变体"></a>ReLU变体</h2><p><img src="/hongyiLi-machine-learning-9/re3.png" alt="re2"></p>
-<h2 id="Maxout"><a href="#Maxout" class="headerlink" title="Maxout"></a>Maxout</h2><p><img src="/hongyiLi-machine-learning-9/maxout.png" alt="maxout"></p>
-<p> <img src="/hongyiLi-machine-learning-9/maxout2.png" alt="maxout2"></p>
+<h2 id="ReLU变体"><a href="#ReLU变体" class="headerlink" title="ReLU变体"></a>ReLU变体</h2><img src="/2018/05/23/hongyiLi-machine-learning-9/re3.png" class="" title="re2">
+
+<h2 id="Maxout"><a href="#Maxout" class="headerlink" title="Maxout"></a>Maxout</h2><img src="/2018/05/23/hongyiLi-machine-learning-9/maxout.png" class="" title="maxout">
+
+ <img src="/2018/05/23/hongyiLi-machine-learning-9/maxout2.png" class="" title="maxout2">
+
 <p>所以可以看到，maxout 可以塑造出不同的activate function</p>
-<p>但是怎么train它呢？ <img src="/hongyiLi-machine-learning-9/train.png" alt="train"></p>
+<p>但是怎么train它呢？ <img src="/2018/05/23/hongyiLi-machine-learning-9/train.png" class="" title="train"></p>
 <p>我们可以看到，因为maxout只选取最大的那个来train，所以那些颜色浅的地方不就train不到了嘛？</p>
 <p>但是实际上，这个问题并不存在。因为每当输入不同的时候，每个z都有可能会被train到，所以不用担心～</p>
 <h2 id="How-to-set-learning-rate"><a href="#How-to-set-learning-rate" class="headerlink" title="How to set learning rate?"></a>How to set learning rate?</h2><p>回顾之前，我们能够动态地调整learning rate，就是Adagrad，每个参数有自己独特的一个learning rate</p>
-<p><img src="/hongyiLi-machine-learning-9/ada.png" alt="ada"></p>
+<img src="/2018/05/23/hongyiLi-machine-learning-9/ada.png" class="" title="ada">
+
 <p>当梯度较大时，证明这里比较陡峭，所以给它比较小的learning rate；当梯度小时，就证明这里比较平坦，所以就给它大一点的learning rate。这么做的目的，是希望各个参数的进步程度都一样，所以如果那个参数的进步比较快，那我们就让它走慢一点；如果那个参数走很慢，那我们就让它一个步伐迈大一点。</p>
 
     </div>
@@ -332,8 +345,8 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2018/05/23/hongyiLi-machine-learning-8/" rel="next" title="Lec-8 "hello world" from deep learning - Machine learning (台大李宏毅)">
-                  Lec-8 "hello world" from deep learning - Machine learning (台大李宏毅) <i class="fa fa-angle-right"></i>
+                <a href="/2018/05/23/hongyiLi-machine-learning-7/" rel="next" title="Lec-7  backpropagation - Machine learning (台大李宏毅)">
+                  Lec-7  backpropagation - Machine learning (台大李宏毅) <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -420,7 +433,7 @@
   <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"naaXkdnpYPUXOj8VlETpQkYr-gzGzoHsz","app_key":"N2cpd0QyqVvPeOafJtl4s0zH","security":false}</script>
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"naaXkdnpYPUXOj8VlETpQkYr-gzGzoHsz","app_key":"N2cpd0QyqVvPeOafJtl4s0zH","security":true}</script>
   <script src="/js/third-party/statistics/lean-analytics.js"></script>
 
 

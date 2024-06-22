@@ -26,15 +26,15 @@
 <meta property="og:site_name" content="Arabela&#39;s Blog">
 <meta property="og:description" content="本文讲述但不仅限于：  German协议流程分析 Murphi执行German协议注意要点">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://arabelatso.github.io/murphi-introduction-8/Slide04.jpg">
-<meta property="og:image" content="https://arabelatso.github.io/murphi-introduction-8/GermanState.jpg">
-<meta property="og:image" content="https://arabelatso.github.io/murphi-introduction-8/lec3a1.jpg">
-<meta property="og:image" content="https://arabelatso.github.io/murphi-introduction-8/Slide07.jpg">
+<meta property="og:image" content="https://arabelatso.github.io/2017/04/01/murphi-introduction-8/Slide04.jpg">
+<meta property="og:image" content="https://arabelatso.github.io/2017/04/01/murphi-introduction-8/GermanState.jpg">
+<meta property="og:image" content="https://arabelatso.github.io/2017/04/01/murphi-introduction-8/lec3a1.jpg">
+<meta property="og:image" content="https://arabelatso.github.io/2017/04/01/murphi-introduction-8/Slide07.jpg">
 <meta property="article:published_time" content="2017-03-31T16:00:00.000Z">
 <meta property="article:modified_time" content="2024-06-22T06:01:34.792Z">
 <meta property="article:author" content="Arabela Tso">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://arabelatso.github.io/murphi-introduction-8/Slide04.jpg">
+<meta name="twitter:image" content="https://arabelatso.github.io/2017/04/01/murphi-introduction-8/Slide04.jpg">
 
 
 <link rel="canonical" href="https://arabelatso.github.io/2017/04/01/murphi-introduction-8/">
@@ -129,18 +129,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-count">55</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -275,7 +275,8 @@
 </ul>
 <p>还一个<strong>互斥变量</strong>，类似于锁机制，叫做ExGntd，是布尔变量，表示是否互斥。只有在写操作正在进行时，才会是true。这样保证一次只会有一个cache对<strong>内存</strong>进行写操作。</p>
 <h1 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h1><p>如果看不懂了上述概念和流程，那么用一个直观的<strong>流程图</strong>来表示German协议的执行过程（例子为3cache模型）</p>
-<p><img src="/murphi-introduction-8/Slide04.jpg" alt="Slide04"></p>
+<img src="/2017/04/01/murphi-introduction-8/Slide04.jpg" class="" title="Slide04">
+
 <h1 id="规则解读"><a href="#规则解读" class="headerlink" title="规则解读"></a>规则解读</h1><h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">ruleset d: DATA do startstate &quot;Init&quot;</span><br><span class="line"> for i: NODE do</span><br><span class="line">   Chan1[i].Cmd := Empty;</span><br><span class="line">   Chan2[i].Cmd := Empty; </span><br><span class="line">   Chan3[i].Cmd := Empty;   </span><br><span class="line">   Chan1[i].Data := d;</span><br><span class="line">   Chan2[i].Data := d; </span><br><span class="line">   Chan3[i].Data := d;   </span><br><span class="line">   Cache[i].State := I;</span><br><span class="line">   Cache[i].Data := d;</span><br><span class="line">   ShrSet[i] := false;</span><br><span class="line">   InvSet[i] := false;</span><br><span class="line">  end;</span><br><span class="line">  CurCmd := Empty;</span><br><span class="line">  ExGntd := false;</span><br><span class="line">  MemData := d;</span><br><span class="line">  AuxData := d;</span><br><span class="line">endstartstate; endruleset;</span><br></pre></td></tr></table></figure>
 
 <ul>
@@ -303,7 +304,8 @@
 </ul>
 <h3 id="解读"><a href="#解读" class="headerlink" title="解读"></a>解读</h3><p>cache向通道申请的内容包括：申请读、申请写。</p>
 <p>I、S、E三种操作，互相转换的关系如图：</p>
-<p><img src="/murphi-introduction-8/GermanState.jpg" alt="GermanState"></p>
+<img src="/2017/04/01/murphi-introduction-8/GermanState.jpg" class="" title="GermanState">
+
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">ruleset j: NODE do</span><br><span class="line"> rule &quot;SendReqS&quot;</span><br><span class="line">      Cache[j].State = I &amp; Chan1[j].Cmd = Empty ==&gt; </span><br><span class="line">        begin Chan1[j].Cmd := ReqS;</span><br><span class="line">endrule; endruleset;</span><br><span class="line"></span><br><span class="line">ruleset i: NODE do</span><br><span class="line"> rule &quot;SendReqEI&quot;</span><br><span class="line">      (Cache[i].State = I) &amp; Chan1[i].Cmd = Empty ==&gt; </span><br><span class="line">        begin Chan1[i].Cmd := ReqE;</span><br><span class="line">endrule; endruleset;</span><br><span class="line"></span><br><span class="line">ruleset i: NODE do</span><br><span class="line"> rule &quot;SendReqES&quot;</span><br><span class="line">      (Cache[i].State = S) &amp; Chan1[i].Cmd = Empty ==&gt; </span><br><span class="line">        begin Chan1[i].Cmd := ReqE;</span><br><span class="line">endrule; endruleset;</span><br><span class="line"></span><br><span class="line">ruleset i: NODE do</span><br><span class="line"> rule &quot;RecvReq&quot;</span><br><span class="line">       CurCmd = Empty &amp; Chan1[i].Cmd != Empty ==&gt;</span><br><span class="line">        begin CurCmd := Chan1[i].Cmd; </span><br><span class="line">              Chan1[i].Cmd := Empty;</span><br><span class="line">              CurPtr := i;</span><br><span class="line">              for j: NODE do</span><br><span class="line">                InvSet[j] := ShrSet[j];</span><br><span class="line">              endfor;</span><br><span class="line">endrule; endruleset;</span><br></pre></td></tr></table></figure>
 
 
@@ -401,9 +403,11 @@
 <p>-k100是表示只开辟100k大小的状态表，这样不会跑到太多。-ta或者-tf都行，这样不会太繁琐，可以只看到改变的量，以及不会看到重复的状态。-vdfs是因为比较方便看运算的路径，毕竟人的思维比较习惯深度地思考，而广度的思考不利于理解协议。</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>对于一个新拿到手的协议，可以先运行上一个section的Tips，跑着看看。等有了更深刻的认识之后，可以用安全性质来做测试。最后就是完全理解协议。当然，能有可视化的方法，就更好理解了。</p>
 <p>目前正在思考有没有方法可以直接可视化。python里提供了一些画图工具，如matplot或者z3都可以画图。问题就是如何将murphi的一条条规则转换成图。如果针对全局变量进行迁移，最多可以生成类似以下的图。</p>
-<p><img src="/murphi-introduction-8/lec3a1.jpg" alt="lec3a1"></p>
+<img src="/2017/04/01/murphi-introduction-8/lec3a1.jpg" class="" title="lec3a1">
+
 <p>但是如果希望生成这样的图</p>
-<p><img src="/murphi-introduction-8/Slide07.jpg" alt="Slide07"></p>
+<img src="/2017/04/01/murphi-introduction-8/Slide07.jpg" class="" title="Slide07">
+
 <p>可能得先给出这样的图，然后根据-ta的输出，每次更改改变了的数据，最后将生成的一张张图进行视频合成输出，方可实现。</p>
 <p>还是需要对python之类的工具有更深刻的理解和实践才能再有更多的想法呀。深深感到自己的心有余而力不足，加油努力吧～</p>
 
@@ -535,7 +539,7 @@
   <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"naaXkdnpYPUXOj8VlETpQkYr-gzGzoHsz","app_key":"N2cpd0QyqVvPeOafJtl4s0zH","security":false}</script>
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"naaXkdnpYPUXOj8VlETpQkYr-gzGzoHsz","app_key":"N2cpd0QyqVvPeOafJtl4s0zH","security":true}</script>
   <script src="/js/third-party/statistics/lean-analytics.js"></script>
 
 

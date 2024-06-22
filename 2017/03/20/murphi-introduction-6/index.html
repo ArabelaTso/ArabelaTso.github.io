@@ -26,10 +26,12 @@
 <meta property="og:site_name" content="Arabela&#39;s Blog">
 <meta property="og:description" content="该博文将继续从程序验证的角度对gcd的murphi程序进行修改， 本次修改的内容为：  循环不变量 迁移规则 ​gcd程序">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://arabelatso.github.io/2017/03/20/murphi-introduction-6/loop%20invariant.jpeg">
 <meta property="article:published_time" content="2017-03-19T16:00:00.000Z">
 <meta property="article:modified_time" content="2024-06-22T06:01:23.220Z">
 <meta property="article:author" content="Arabela Tso">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://arabelatso.github.io/2017/03/20/murphi-introduction-6/loop%20invariant.jpeg">
 
 
 <link rel="canonical" href="https://arabelatso.github.io/2017/03/20/murphi-introduction-6/">
@@ -124,18 +126,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-count">55</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -265,7 +267,10 @@
 <h1 id="前置条件-vs-后置条件"><a href="#前置条件-vs-后置条件" class="headerlink" title="前置条件 vs 后置条件"></a>前置条件 vs 后置条件</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> precondition <span class="keyword">do</span></span><br><span class="line">&#123;</span><br><span class="line">  executive body;</span><br><span class="line">&#125; until postcondition</span><br></pre></td></tr></table></figure>
 
 <p>前置条件即为循环开始时满足的条件，后置条件为循环结束时需满足的条件。即，在循环开始时，由于满足了某种条件，使得循环体得以执行；每次循环之后都检验一次循环的后置条件，如果满足后置条件，则结束循环。</p>
-<p>![loop invariant](murphi-introduction-6&#x2F;loop invariant.jpeg)</p>
+<img src="/2017/03/20/murphi-introduction-6/loop%20invariant.jpeg" class="" title="loop invariant">
+
+
+
 <p>这就是从前置条件，经过循环，满足了结束条件，而退出循环的过程。其中可以看到，后置条件有很多，我们选择一个条件，作为退出条件即可。<strong>我们找循环不变量的方法，就是从后置条件中选择出循环不变量。</strong></p>
 <h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><p>我们仍旧以GCD为例子，通过前两次的修改，对GCD的理解已经比较深入了。这次将理解，建立在循环不变量上，首先要了解<strong>三个关于GCD的数学性质</strong>：</p>
 <p><strong>（其中，a，b是需要计算gcd的两个输入值。初始：Result&#x3D;a，x&#x3D;b）</strong><br>$$<br>Result &#x3D; x \wedge gcd(Result,x) &#x3D; gcd(a,b)<br>$$</p>
@@ -412,7 +417,7 @@
   <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"naaXkdnpYPUXOj8VlETpQkYr-gzGzoHsz","app_key":"N2cpd0QyqVvPeOafJtl4s0zH","security":false}</script>
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"naaXkdnpYPUXOj8VlETpQkYr-gzGzoHsz","app_key":"N2cpd0QyqVvPeOafJtl4s0zH","security":true}</script>
   <script src="/js/third-party/statistics/lean-analytics.js"></script>
 
 
