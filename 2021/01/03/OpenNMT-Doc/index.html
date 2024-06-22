@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://arabelatso.github.io/OpenNMT-Doc/orpus.png">
 <meta property="og:image" content="https://arabelatso.github.io/OpenNMT-Doc/taboeba.png">
 <meta property="article:published_time" content="2021-01-02T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-06-21T12:30:20.421Z">
+<meta property="article:modified_time" content="2024-06-22T07:21:44.624Z">
 <meta property="article:author" content="Arabela Tso">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://arabelatso.github.io/OpenNMT-Doc/parallel.png">
@@ -128,18 +128,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">1</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -207,7 +207,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-06-21 20:30:20" itemprop="dateModified" datetime="2024-06-21T20:30:20+08:00">2024-06-21</time>
+      <time title="修改时间：2024-06-22 15:21:44" itemprop="dateModified" datetime="2024-06-22T15:21:44+08:00">2024-06-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -215,7 +215,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/DL/" itemprop="url" rel="index"><span itemprop="name">DL</span></a>
+          <a href="/categories/Manual/" itemprop="url" rel="index"><span itemprop="name">Manual</span></a>
         </span>
     </span>
 
@@ -225,7 +225,8 @@
         <i class="far fa-eye"></i>
       </span>
       <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
+      <span class="leancloud-visitors-count">
+      </span>
     </span>
 </div>
 
@@ -286,17 +287,17 @@
 <p>但这个dataset很小，训练效果不会好，所以这里下载更多的dataset。</p>
 <p>（如果只打算跑通一个例子，可以直接跳到下一个小节，不用重新下载新的dataset）</p>
 <h3 id="Dataset-Download"><a href="#Dataset-Download" class="headerlink" title="Dataset Download"></a>Dataset Download</h3><h4 id="WMT-DATASET"><a href="#WMT-DATASET" class="headerlink" title="WMT DATASET"></a>WMT DATASET</h4><p>Link: <a target="_blank" rel="noopener" href="https://www.statmt.org/wmt13/translation-task.html#download">https://www.statmt.org/wmt13/translation-task.html#download</a></p>
-<p><img src="/OpenNMT-Doc/parallel.png" alt="parallel"></p>
+<p><img src="/./OpenNMT-Doc/parallel.png" alt="parallel"></p>
 <p>WMT 数据集，每年都有。上面的link是WMT13年的link。要找哪一年的dataset，就把 <code>wmt13</code> 这个数字改成那一年。比如要找WMT19的dataset，下载地址就是 <a target="_blank" rel="noopener" href="https://www.statmt.org/wmt19/translation-task.html#download%E3%80%82">https://www.statmt.org/wmt19/translation-task.html#download。</a></p>
 <p>因为每一年翻译任务的语言不一样，所以根据要训练的翻译模型自己找年份 :(</p>
 <p>下载解压之后，一般有两个文件夹。根据dataset不同，名字可能不同，但能看出来一个是源语言(<code>src</code>)，一个是目标语言(<code>tgt</code>)。文件的形式是一行一句话。</p>
 <h4 id="OPUS"><a href="#OPUS" class="headerlink" title="OPUS"></a>OPUS</h4><p>Link: <a target="_blank" rel="noopener" href="http://opus.nlpl.eu/">http://opus.nlpl.eu/</a></p>
 <p>这个网站也包含WMT的入口，很杂很乱，但好在可以选source，target language, customize 的空间很大。</p>
 <p>下载之后的形式和WMT 的dataset很像，也是一行一句话。</p>
-<p><img src="/OpenNMT-Doc/orpus.png" alt="orpus"></p>
+<p><img src="/./OpenNMT-Doc/orpus.png" alt="orpus"></p>
 <h4 id="Tatoeba-Kaggle"><a href="#Tatoeba-Kaggle" class="headerlink" title="Tatoeba Kaggle"></a>Tatoeba Kaggle</h4><p><a target="_blank" rel="noopener" href="http://www.manythings.org/anki/">http://www.manythings.org/anki/</a></p>
 <p>这个网站的好处是简洁，一看就知道在哪里下载。</p>
-<p><img src="/OpenNMT-Doc/taboeba.png" alt="orpus"></p>
+<p><img src="/./OpenNMT-Doc/taboeba.png" alt="orpus"></p>
 <p>缺点是数据集不大，且双语放在同一个文件中，格式为<code>English + TAB + The Other Language + TAB + Attribution</code>。 如：</p>
 <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">This work isn&#x27;t easy.	この仕事は簡単じゃない。	CC-BY 2.0 (France) Attribution: tatoeba.org #3737550 (CK) &amp; #7977622 (Ninja)</span><br><span class="line">Those are sunflowers.	それはひまわりです。	CC-BY 2.0 (France) Attribution: tatoeba.org #441940 (CK) &amp; #205407 (arnab)</span><br><span class="line">Tom bought a new car.	トムは新車を買った。	CC-BY 2.0 (France) Attribution: tatoeba.org #1026984 (CK) &amp; #2733633 (tommy_san)</span><br><span class="line">This watch is broken.	この時計は壊れている。	CC-BY 2.0 (France) Attribution: tatoeba.org #58929 (CK) &amp; #221604 (bunbuku)</span><br></pre></td></tr></table></figure>
 
@@ -421,9 +422,6 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2024/06/21/latex-tips-0/some-english-translations/" rel="next" title="常用英文翻译（简历相关）">
-                  常用英文翻译（简历相关） <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -509,7 +507,7 @@
   <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"naaXkdnpYPUXOj8VlETpQkYr-gzGzoHsz","app_key":"N2cpd0QyqVvPeOafJtl4s0zH","security":true}</script>
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"naaXkdnpYPUXOj8VlETpQkYr-gzGzoHsz","app_key":"N2cpd0QyqVvPeOafJtl4s0zH","security":false}</script>
   <script src="/js/third-party/statistics/lean-analytics.js"></script>
 
 
